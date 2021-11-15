@@ -1,0 +1,14 @@
+@use 'variables';
+
+html, body{
+    // background-color: variables.$bg; // 变量用 css 原生变量就好啦
+    background-color: var(--bg);
+    color: var(--text);
+    // webpack 5 刚出来的时候有 .browderslistrc 文件导致热重载失效的 bug，现在已经没有了
+    font-size: 100px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
