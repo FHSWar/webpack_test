@@ -1,1 +1,14 @@
-@use 'global'
+@use 'global';
+
+.big-pic {
+    width: 100px;
+    height: 100px;
+    background-image: url(../images/tree.jpg);
+    background-size: contain;
+}
+.small-pic {
+    width: 100px;
+    height: 100px;
+    background-image: url(../images/me.jpg);
+    background-size: contain;
+}
