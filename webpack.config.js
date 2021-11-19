@@ -93,9 +93,14 @@ module.exports = {
         new MiniCSSExtractPlugin(), 
         // 默认能从 src/index.html 提取给到 dist 用
         new HtmlWebpackPlugin({
-            title: 'webpack_test',
+            title: 'vue2 in swebpack5',
             tempalate: "./src/index.html"
         }),
+        // new HtmlWebpackPlugin({  // Also generate a test.html
+        //     filename: 'test_one.html',
+        //     template: './src/pages/page_one/index.html',
+        //     chunks: ['testOne']
+        // }),
         new VueLoaderPlugin()
     ],
     // devServer 是用来本地开发的，里面的 static 以前是 contentBase
