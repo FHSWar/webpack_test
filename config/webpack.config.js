@@ -1,18 +1,18 @@
 // webpack 的核心配置，通过在 package.json 中指定 --config 让根目录的 config 文件夹中的 webpack.config.js 能被读取到
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
-const VueLoaderPlugin = require("vue-loader/lib/plugin-webpack5")
-const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin')
-const miniSVGDataURI = require('mini-svg-data-uri');
-const [HTMLPlugins, Entries] = require('./multipage_process')
 const path = require('path');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin')
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
+const MiniSVGDataURI = require('mini-svg-data-uri');
+const VueLoaderPlugin = require("vue-loader/lib/plugin-webpack5")
+const [HTMLPlugins, Entries] = require('./pages.config')
 
 const PRODUCTION = 'production', DEVELOPMENT = 'development', ANALYSIS = 'analysis'
 const isDev = process.env.NODE_ENV === DEVELOPMENT
 const isProd = process.env.NODE_ENV === PRODUCTION
 const isAnls = process.env.NODE_ENV === ANALYSIS
 
-const config = {
+const basic = {
     entry: Entries, // entry 默认是 './src/index.js'
     output: { // output 的 filename 默认是 main.js，path 默认是 dist 文件夹
         filename: '[name]/index[contenthash].js',
@@ -100,7 +100,7 @@ const modules = {
                 generator: {
                     dataUrl(content) {
                     content = content.toString();
-                    return miniSVGDataURI(content);
+                    return MiniSVGDataURI(content);
                     }
                 },
                 use: 'svgo-loader'
@@ -138,25 +138,25 @@ const plugins = [
 switch(true) {
     // 用来分析包的大小，提供优化用信息
     case isAnls:
-        config.mode = DEVELOPMENT,
+        basic.mode = DEVELOPMENT,
         plugins.push(new BundleAnalyzerPlugin())
         break
     // 提供 source-map，方便调适
     case isDev:
         // mode 是给 webpack 分辨以何种方式打包用的
-        config.mode = DEVELOPMENT,
+        basic.mode = DEVELOPMENT,
         // devTool 用来看到 babel 之前的代码，方便调试
         devServer.devtool = 'source-map'
         break
     // 最小化打包，最大化性能
     case isProd:
-        config.mode = PRODUCTION
+        basic.mode = PRODUCTION
         devServer.devtool = false
         break
 }
 
 module.exports = {
-    ...config,
+    ...basic,
     ...devServer,
     ...modules,
     plugins
