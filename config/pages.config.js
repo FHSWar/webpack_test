@@ -21,6 +21,7 @@ pagesArr.map(page => {
     const htmlPlugin = new HTMLWebpackPlugin({
         filename: `${page}.html`, // 生成到dist目录下的 html 文件名称
         template: pageTemplate, // 模板文件，不同入口可以根据需要设置不同模板
+        chunks: [page], //引入对应的js(对应(entry)中的入口文件)
     });
 
     HTMLPlugins.push(htmlPlugin);

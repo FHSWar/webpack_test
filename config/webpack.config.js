@@ -1,5 +1,5 @@
 // webpack 的核心配置，通过在 package.json 中指定 --config 让根目录的 config 文件夹中的 webpack.config.js 能被读取到
-const path = require('path');
+const { resolve } = require('path');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
@@ -25,9 +25,10 @@ const basic = {
     resolve: {
         // extensions: ['.js', '.vue', '.json'],
         alias: {
-            Fonts: path.resolve(__dirname, '../src/public/fonts'),
-            Icons: path.resolve(__dirname, '../src/public/icons'),
-            Images: path.resolve(__dirname, '../src/public/images'),
+            '@': resolve('src'),
+            '@fonts': resolve(__dirname, '../src/public/fonts'),
+            '@icons': resolve(__dirname, '../src/public/icons'),
+            '@images': resolve(__dirname, '../src/public/images'),
         },
     },
 }
@@ -76,8 +77,9 @@ const modules = {
                 }
             },
             {
-                test: /\.(png|jpg?g|gif)$/i,
-                // 用于取代 webpack 的 file-loade，url-loader
+                test: /\.(gif|jpg?g|png)$/i,
+                // 用于取代 webpack 的 file-loade，url-loader，自带超强压缩！
+                // 只要文件相同，最后打包出来hash相同，也就是只会有一份，也就是说项目里图片重复了也不会影响包的大小
                 type: 'asset',
                 parser: {
                     // 小于指定大小的资源会被写为内联 base64
@@ -112,6 +114,13 @@ const modules = {
 const plugins = [
     // 用来压缩图片的，可以无损压缩也可以有损压缩，换对应的 plugin 就好了
     new ImageMinimizerPlugin({
+        // 能捕获就能处理，或者可以不处理
+        // filter: (_, sourcePath) => {
+        //     if(sourcePath.includes('src/pages/dashboard')) {
+        //         return false
+        //     }
+        //     return true
+        // },
         minimizerOptions: {
           // Lossless optimization with custom option
           // Feel free to experiment with options for better result for you
@@ -124,11 +133,24 @@ const plugins = [
           ],
         },
     }),
+    // new ImageMinimizerPlugin({
+    //     deleteOriginalAssets: false,
+    //     // filename: '[path][name].webp',
+    //     // filename: 'webp/[name]_[fullhash].webp',
+    //     filter: (source, sourcePath) => {
+    //         if(sourcePath.endsWith('.svg') || source.byteLength < 12 * 1024) return false
+    //         return true
+    //     },
+    //     minimizerOptions: {
+    //       plugins: ['imagemin-webp'],
+    //     },
+    // }),
     // style-loader 的替代选项，区别在于 MiniCSSExtractPlugin.loader 能把 css 从打包的 js 文件中分出来
     new MiniCSSExtractPlugin({
         filename: "[name]/[contenthash].css",
         chunkFilename: "[name]/[id]-[contenthash].css"
     }), 
+
     // htmlWebpackPlugin 默认能生成一个 index.html，要多页面就多 new 几个
     ...HTMLPlugins,
     new VueLoaderPlugin()
