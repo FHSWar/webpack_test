@@ -7,8 +7,13 @@
 <script>
 // @ is an alias to /src
 export default {
-  name: 'Home',
-  components: {
-  }
+	name: 'compoentHome',
+	components: {
+	},
+	data () {
+		return{
+			aB: 1
+		}
+	}
 }
 </script>

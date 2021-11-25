@@ -1,6 +1,7 @@
 // webpack 的核心配置，通过在 package.json 中指定 --config 让根目录的 config 文件夹中的 webpack.config.js 能被读取到
 const { resolve } = require('path');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const ESLintPlugin = require('eslint-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const MiniSVGDataURI = require('mini-svg-data-uri');
@@ -48,7 +49,7 @@ const modules = {
         rules: [
             {
                 test: /.vue$/,
-                loader: 'vue-loader'
+                use: ['vue-loader']// , 'eslint-loader'
             },
             {
                 test: /\.ejs$/, 
@@ -112,6 +113,10 @@ const modules = {
 }
 
 const plugins = [
+    new ESLintPlugin({
+        fix: true,
+        extensions: ['js', 'json', 'vue'],
+    }),
     // 用来压缩图片的，可以无损压缩也可以有损压缩，换对应的 plugin 就好了
     new ImageMinimizerPlugin({
         // 能捕获就能处理，或者可以不处理
