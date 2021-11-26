@@ -1,18 +1,26 @@
 // webpack 的核心配置，通过在 package.json 中指定 --config 让根目录的 config 文件夹中的 webpack.config.js 能被读取到
-const { resolve } = require('path')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const { loopWhile } = require('deasync')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const MiniSVGDataURI = require('mini-svg-data-uri')
+const { networkInterfaces } = require('os');
+const { resolve } = require('path')
+const { getPort } = require('portfinder');
 const VueLoaderPlugin = require("vue-loader/lib/plugin-webpack5")
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const [HTMLPlugins, Entries] = require('./pages.config')
 
 const PRODUCTION = 'production', DEVELOPMENT = 'development', ANALYSIS = 'analysis'
 const isAnls = process.env.NODE_ENV === ANALYSIS
 const isDev = process.env.NODE_ENV === DEVELOPMENT
 const isProd = process.env.NODE_ENV === PRODUCTION
+const IP = networkInterfaces()['en0'][1]['address']
+console.log('IPIPIP', IP)
+
+let port = 9000, done = false
+getUsablePort(port)
 
 const basic = {
     entry: Entries, // entry 默认是 './src/index.js'
@@ -40,6 +48,7 @@ const devServer = {
     // devServer 是用来本地开发的，里面的 static 以前是 contentBase
     devServer: {
         // hot: true // 默认 HMR 和 live-reload 都是开启的
+        port,
         // 默认是 ./public/index.html, 其实可以 output 指定为 public 文件夹然后这个就可以不配置
         static: './dist',
     },
@@ -119,7 +128,12 @@ const plugins = [
         fix: true,
         extensions: ['js', 'json', 'vue'],
     }),
-    new FriendlyErrorsWebpackPlugin(),
+    new FriendlyErrorsWebpackPlugin({
+        compilationSuccessInfo: {
+            messages: [`You application is running here: http://localhost:${port}`],
+            notes: [`You can also visit it by: http://${IP}:${port}`],
+        },
+    }),
     // 用来压缩图片的，可以无损压缩也可以有损压缩，换对应的 plugin 就好了
     new ImageMinimizerPlugin({
         // 能捕获就能处理，或者可以不处理
@@ -164,6 +178,22 @@ const plugins = [
     new VueLoaderPlugin()
 ]
 
+// portFinder 是异步的，通过 deasync 转为阻塞的同步代码
+function getUsablePort(customPort){
+    getPort(
+        {
+            port: customPort,    // minimum port
+            stopPort: customPort + 999 // maximum port
+        },
+        (err, usablePort) => {
+            if(err) throw new Error('portFinder error', err)
+            done = true
+            port = usablePort
+        }
+    )
+    loopWhile(() => !done);
+}
+
 // 根据不同的环境追加不同的配置
 switch(true) {
     // 用来分析包的大小，提供优化用信息
@@ -176,7 +206,7 @@ switch(true) {
         // mode 是给 webpack 分辨以何种方式打包用的
         basic.mode = DEVELOPMENT,
         // 关掉 webpack 原有的 terminal 冗余输出
-        basic.stats = 'errors-only',
+        basic.stats = 'errors-warnings',
         // devTool 用来看到 babel 之前的代码，方便调试
         devServer.devtool = 'source-map'
         break

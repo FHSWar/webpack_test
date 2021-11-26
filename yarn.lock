@@ -1499,6 +1499,13 @@ binary-extensions@^2.0.0:
   resolved "https://registry.npmmirror.com/binary-extensions/download/binary-extensions-2.2.0.tgz"
   integrity sha1-dfUC7q+f/eQvyYgpZFvk6na9ni0=
 
+bindings@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.npmmirror.com/bindings/download/bindings-1.5.0.tgz#10353c9e945334bc0511a6d90b38fbc7c9c504df"
+  integrity sha1-EDU8npRTNLwFEabZCzj7x8nFBN8=
+  dependencies:
+    file-uri-to-path "1.0.0"
+
 bl@^1.0.0:
   version "1.2.3"
   resolved "https://registry.npmmirror.com/bl/download/bl-1.2.3.tgz?cache=0&sync_timestamp=1632752926555&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fbl%2Fdownload%2Fbl-1.2.3.tgz"
@@ -2070,6 +2077,14 @@ de-indent@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmmirror.com/de-indent/download/de-indent-1.0.2.tgz"
   integrity sha1-sgOOhG3DO6pXlhKNCAS0VbjB4h0=
+
+deasync@^0.1.24:
+  version "0.1.24"
+  resolved "https://registry.npmmirror.com/deasync/download/deasync-0.1.24.tgz#6ecc9c6ff9eba64a4f4572ae3c4db77fed09268a"
+  integrity sha512-i98vg42xNfRZCymummMAN0rIcQ1gZFinSe3btvPIvy6JFTaeHcumeKybRo2HTv86nasfmT0nEgAn2ggLZhOCVA==
+  dependencies:
+    bindings "^1.5.0"
+    node-addon-api "^1.7.1"
 
 debug@2.6.9:
   version "2.6.9"
@@ -2843,6 +2858,11 @@ file-type@^8.1.0:
   version "8.1.0"
   resolved "https://registry.npmmirror.com/file-type/download/file-type-8.1.0.tgz"
   integrity sha1-JE87fvZBu+DMoZbHJ25LMyOZ9ow=
+
+file-uri-to-path@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmmirror.com/file-uri-to-path/download/file-uri-to-path-1.0.0.tgz#553a7b8446ff6f684359c445f1e37a05dacc33dd"
+  integrity sha1-VTp7hEb/b2hDWcRF8eN6BdrMM90=
 
 filename-reserved-regex@^2.0.0:
   version "2.0.0"
@@ -4253,6 +4273,11 @@ no-case@^3.0.4:
     lower-case "^2.0.2"
     tslib "^2.0.3"
 
+node-addon-api@^1.7.1:
+  version "1.7.2"
+  resolved "https://registry.npmmirror.com/node-addon-api/download/node-addon-api-1.7.2.tgz#3df30b95720b53c24e59948b49532b662444f54d"
+  integrity sha1-PfMLlXILU8JOWZSLSVMrZiRE9U0=
+
 node-forge@^0.10.0:
   version "0.10.0"
   resolved "https://registry.npmmirror.com/node-forge/download/node-forge-0.10.0.tgz"
@@ -4713,7 +4738,7 @@ pngquant-bin@^6.0.0:
 
 portfinder@^1.0.28:
   version "1.0.28"
-  resolved "https://registry.npmmirror.com/portfinder/download/portfinder-1.0.28.tgz"
+  resolved "https://registry.npmmirror.com/portfinder/download/portfinder-1.0.28.tgz#67c4622852bd5374dd1dd900f779f53462fac778"
   integrity sha1-Z8RiKFK9U3TdHdkA93n1NGL6x3g=
   dependencies:
     async "^2.6.2"
