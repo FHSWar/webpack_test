@@ -9,9 +9,9 @@ const VueLoaderPlugin = require("vue-loader/lib/plugin-webpack5")
 const [HTMLPlugins, Entries] = require('./pages.config')
 
 const PRODUCTION = 'production', DEVELOPMENT = 'development', ANALYSIS = 'analysis'
+const isAnls = process.env.NODE_ENV === ANALYSIS
 const isDev = process.env.NODE_ENV === DEVELOPMENT
 const isProd = process.env.NODE_ENV === PRODUCTION
-const isAnls = process.env.NODE_ENV === ANALYSIS
 
 const basic = {
     entry: Entries, // entry 默认是 './src/index.js'
@@ -30,6 +30,7 @@ const basic = {
             '@fonts': resolve(__dirname, '../src/public/fonts'),
             '@icons': resolve(__dirname, '../src/public/icons'),
             '@images': resolve(__dirname, '../src/public/images'),
+            '@utils': resolve(__dirname, '../src/public/utils'),
         },
     },
 }
@@ -37,9 +38,9 @@ const basic = {
 const devServer = {
     // devServer 是用来本地开发的，里面的 static 以前是 contentBase
     devServer: {
+        // hot: true // 默认 HMR 和 live-reload 都是开启的
         // 默认是 ./public/index.html, 其实可以 output 指定为 public 文件夹然后这个就可以不配置
         static: './dist',
-        // hot: true // 默认 HMR 和 live-reload 都是开启的
     },
 }
 
@@ -47,10 +48,6 @@ const modules = {
     // module 里面可以放 loader
     module: {
         rules: [
-            {
-                test: /.vue$/,
-                use: ['vue-loader']// , 'eslint-loader'
-            },
             {
                 test: /\.ejs$/, 
                 use: {
@@ -61,20 +58,6 @@ const modules = {
                       removeComments: true
                     }
                   }
-                }
-            },
-            {
-                // css, sass, scss 文件都会被正确的处理
-                test: /\.(s[ac]|c)ss$/i,
-                // 不加 scss loader 不会报错但是 scss 文件会不生效
-                // postcss-loader 应该在 sass-loader 前面，虽然反过来也不报错，但 postcss-loader 就会失效，因为没加到前缀
-                use: [MiniCSSExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader'
                 }
             },
             {
@@ -92,6 +75,20 @@ const modules = {
                 // use: 'svgo-loader'
             },
             {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            },
+            {
+                // css, sass, scss 文件都会被正确的处理
+                test: /\.(s[ac]|c)ss$/i,
+                // 不加 scss loader 不会报错但是 scss 文件会不生效
+                // postcss-loader 应该在 sass-loader 前面，虽然反过来也不报错，但 postcss-loader 就会失效，因为没加到前缀
+                use: [MiniCSSExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
+            },
+            {
                 test: /\.svg$/i,
                 type: 'asset',
                 parser: {
@@ -107,6 +104,10 @@ const modules = {
                     }
                 },
                 use: 'svgo-loader'
+            },
+            {
+                test: /.vue$/,
+                use: ['vue-loader']// , 'eslint-loader'
             }
         ]
     },
@@ -172,6 +173,8 @@ switch(true) {
     case isDev:
         // mode 是给 webpack 分辨以何种方式打包用的
         basic.mode = DEVELOPMENT,
+        // 关掉 webpack 原有的 terminal 冗余输出
+        basic.stats = 'errors-only',
         // devTool 用来看到 babel 之前的代码，方便调试
         devServer.devtool = 'source-map'
         break

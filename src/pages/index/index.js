@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import router from './router'
 import store from './store'
+import Request from '@utils/axios'
 
 import App from './App.vue'
 
 Vue.config.productionTip = false
+Vue.prototype.$request = Request
 
 const root = document.createElement('div')
 document.body.appendChild(root)

@@ -5,7 +5,7 @@ module.exports = {
 	},
 	'extends': [
 		'eslint:recommended',
-		'plugin:vue/strongly-recommended'//
+		'plugin:vue/strongly-recommended'
 	],
 	'parserOptions': {
 		'ecmaVersion': 13,
