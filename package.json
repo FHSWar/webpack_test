@@ -2,11 +2,11 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --config config/webpack.config.js",
-    "build-dev": "cross-env NODE_ENV=development webpack --config config/webpack.config.js",
-    "build-anls": "cross-env NODE_ENV=analysis webpack --config config/webpack.config.js",
-    "dev": "cross-env NODE_ENV=development webpack serve --config config/webpack.config.js",
-    "watch": "webpack --watch --config config/webpack.config.js"
+    "anls": "cross-env NODE_ENV=analysis webpack --config config/webpack.config",
+    "build": "cross-env NODE_ENV=production webpack --config config/webpack.config",
+    "build-dev": "cross-env NODE_ENV=development webpack --config config/webpack.config",
+    "dev": "cross-env NODE_ENV=development webpack serve --config config/webpack.config",
+    "watch": "webpack --watch --config config/webpack.config"
   },
   "dependencies": {
     "axios": "^0.24.0",

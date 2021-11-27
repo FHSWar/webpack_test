@@ -117,7 +117,13 @@ const _module = {
         }
     ]
 }
-// }
+
+// 最合理的代码分割，让该共用的部分共用
+const optimization = {
+    splitChunks: {
+        chunks: 'all'
+    }
+}
 
 const plugins = [
     new ESLintPlugin({
@@ -213,5 +219,6 @@ module.exports = {
     devServer,
     // nodejs 顶层作用域不能用 module，所以加个下划线区分下
     module: _module,
+    // optimization,
     plugins
 }
