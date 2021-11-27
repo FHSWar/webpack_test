@@ -219,6 +219,6 @@ module.exports = {
     devServer,
     // nodejs 顶层作用域不能用 module，所以加个下划线区分下
     module: _module,
-    // optimization,
+    optimization,
     plugins
 }
