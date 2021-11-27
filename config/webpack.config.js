@@ -17,7 +17,6 @@ const isAnls = process.env.NODE_ENV === ANALYSIS
 const isDev = process.env.NODE_ENV === DEVELOPMENT
 const isProd = process.env.NODE_ENV === PRODUCTION
 const IP = networkInterfaces()['en0'][1]['address']
-console.log('IPIPIP', IP)
 
 let port = 9000, done = false
 getUsablePort(port)
@@ -44,84 +43,81 @@ const basic = {
     },
 }
 
+// devServer 是用来本地开发的，里面的 static 以前是 contentBase
 const devServer = {
-    // devServer 是用来本地开发的，里面的 static 以前是 contentBase
-    devServer: {
-        // hot: true // 默认 HMR 和 live-reload 都是开启的
-        port,
-        // 默认是 ./public/index.html, 其实可以 output 指定为 public 文件夹然后这个就可以不配置
-        static: './dist',
-    },
+    // hot: true // 默认 HMR 和 live-reload 都是开启的
+    port,
+    // 默认是 ./public/index.html, 其实可以 output 指定为 public 文件夹然后这个就可以不配置
+    static: './dist',
 }
 
-const modules = {
-    // module 里面可以放 loader
-    module: {
-        rules: [
-            {
-                test: /\.ejs$/, 
-                use: {
-                  loader: 'ejs-compiled-loader',
-                  options: {
-                    htmlmin: true,
-                    htmlminOptions: {
-                      removeComments: true
-                    }
-                  }
+// module 里面可以放 loader
+const _module = {
+    rules: [
+        {
+            test: /\.ejs$/, 
+            use: {
+                loader: 'ejs-compiled-loader',
+                options: {
+                htmlmin: true,
+                htmlminOptions: {
+                    removeComments: true
                 }
-            },
-            {
-                test: /\.(gif|jpg?g|png)$/i,
-                // 用于取代 webpack 的 file-loade，url-loader，自带超强压缩！
-                // 只要文件相同，最后打包出来hash相同，也就是只会有一份，也就是说项目里图片重复了也不会影响包的大小
-                type: 'asset',
-                parser: {
-                    // 小于指定大小的资源会被写为内联 base64
-                    dataUrlCondition: {
-                        // 默认是 8 kb
-                        maxSize: 12 * 1024
-                    }
-                },
-                // use: 'svgo-loader'
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader'
                 }
-            },
-            {
-                // css, sass, scss 文件都会被正确的处理
-                test: /\.(s[ac]|c)ss$/i,
-                // 不加 scss loader 不会报错但是 scss 文件会不生效
-                // postcss-loader 应该在 sass-loader 前面，虽然反过来也不报错，但 postcss-loader 就会失效，因为没加到前缀
-                use: [MiniCSSExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
-            },
-            {
-                test: /\.svg$/i,
-                type: 'asset',
-                parser: {
-                    dataUrlCondition: {
-                        maxSize: 12 * 1024
-                    }
-                },
-                // 通过这个生成的 uri 就不是 base64，会比 base64 更小一点
-                generator: {
-                    dataUrl(content) {
-                    content = content.toString();
-                    return MiniSVGDataURI(content);
-                    }
-                },
-                use: 'svgo-loader'
-            },
-            {
-                test: /.vue$/,
-                use: ['vue-loader']// , 'eslint-loader'
             }
-        ]
-    },
+        },
+        {
+            test: /\.(gif|jpg?g|png)$/i,
+            // 用于取代 webpack 的 file-loade，url-loader，自带超强压缩！
+            // 只要文件相同，最后打包出来hash相同，也就是只会有一份，也就是说项目里图片重复了也不会影响包的大小
+            type: 'asset',
+            parser: {
+                // 小于指定大小的资源会被写为内联 base64
+                dataUrlCondition: {
+                    // 默认是 8 kb
+                    maxSize: 12 * 1024
+                }
+            },
+            // use: 'svgo-loader'
+        },
+        {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+                loader: 'babel-loader'
+            }
+        },
+        {
+            // css, sass, scss 文件都会被正确的处理
+            test: /\.(s[ac]|c)ss$/i,
+            // 不加 scss loader 不会报错但是 scss 文件会不生效
+            // postcss-loader 应该在 sass-loader 前面，虽然反过来也不报错，但 postcss-loader 就会失效，因为没加到前缀
+            use: [MiniCSSExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
+        },
+        {
+            test: /\.svg$/i,
+            type: 'asset',
+            parser: {
+                dataUrlCondition: {
+                    maxSize: 12 * 1024
+                }
+            },
+            // 通过这个生成的 uri 就不是 base64，会比 base64 更小一点
+            generator: {
+                dataUrl(content) {
+                content = content.toString();
+                return MiniSVGDataURI(content);
+                }
+            },
+            use: 'svgo-loader'
+        },
+        {
+            test: /.vue$/,
+            use: ['vue-loader']// , 'eslint-loader'
+        }
+    ]
 }
+// }
 
 const plugins = [
     new ESLintPlugin({
@@ -130,43 +126,38 @@ const plugins = [
     }),
     new FriendlyErrorsWebpackPlugin({
         compilationSuccessInfo: {
-            messages: [`You application is running here: http://localhost:${port}`],
-            notes: [`You can also visit it by: http://${IP}:${port}`],
+            messages: [
+                `You application is running here: http://localhost:${port}`,
+                `You can also visit it by: http://${IP}:${port}`
+            ],
         },
     }),
-    // 用来压缩图片的，可以无损压缩也可以有损压缩，换对应的 plugin 就好了
+    // 用来压缩图片的，可以无损压缩也可以有损压缩，换对应的 plugin 就好了，可以用 filter 对不同目录和大小的图片单独处理
     new ImageMinimizerPlugin({
-        // 能捕获就能处理，或者可以不处理
-        // filter: (_, sourcePath) => {
-        //     if(sourcePath.includes('src/pages/dashboard')) {
-        //         return false
-        //     }
-        //     return true
-        // },
         minimizerOptions: {
-          // Lossless optimization with custom option
-          // Feel free to experiment with options for better result for you
-          plugins: [
-            ['gifsicle', { interlaced: true }],
-            ['mozjpeg', { quality: 80 }],
-            // ['jpegtran', { progressive: true }],
-            ['pngquant', { quality: [0.6, 0.8], }],
-            // ['optipng', { optimizationLevel: 5 }],
-          ],
+            // Lossless optimization with custom option
+            // Feel free to experiment with options for better result for you
+            plugins: [
+                ['gifsicle', { interlaced: true }],
+                ['mozjpeg', { quality: 80 }],
+                // ['jpegtran', { progressive: true }],
+                ['pngquant', { quality: [0.6, 0.8], }],
+                // ['optipng', { optimizationLevel: 5 }],
+            ],
         },
     }),
-    // new ImageMinimizerPlugin({
-    //     deleteOriginalAssets: false,
-    //     // filename: '[path][name].webp',
-    //     // filename: 'webp/[name]_[fullhash].webp',
-    //     filter: (source, sourcePath) => {
-    //         if(sourcePath.endsWith('.svg') || source.byteLength < 12 * 1024) return false
-    //         return true
-    //     },
-    //     minimizerOptions: {
-    //       plugins: ['imagemin-webp'],
-    //     },
-    // }),
+    /* new ImageMinimizerPlugin({
+        deleteOriginalAssets: false,
+        // filename: '[path][name].webp',
+        // filename: 'webp/[name]_[fullhash].webp',
+        filter: (source, sourcePath) => {
+            if(sourcePath.endsWith('.svg') || source.byteLength < 12 * 1024) return false
+            return true
+        },
+        minimizerOptions: {
+          plugins: ['imagemin-webp'],
+        },
+    }), */
     // style-loader 的替代选项，区别在于 MiniCSSExtractPlugin.loader 能把 css 从打包的 js 文件中分出来
     new MiniCSSExtractPlugin({
         filename: "[name]/[contenthash].css",
@@ -208,18 +199,19 @@ switch(true) {
         // 关掉 webpack 原有的 terminal 冗余输出
         basic.stats = 'errors-warnings',
         // devTool 用来看到 babel 之前的代码，方便调试
-        devServer.devtool = 'source-map'
+        basic.devtool = 'source-map'
         break
     // 最小化打包，最大化性能
     case isProd:
         basic.mode = PRODUCTION
-        devServer.devtool = false
+        basic.devtool = false
         break
 }
 
 module.exports = {
     ...basic,
-    ...devServer,
-    ...modules,
+    devServer,
+    // nodejs 顶层作用域不能用 module，所以加个下划线区分下
+    module: _module,
     plugins
 }
