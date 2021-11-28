@@ -219,6 +219,7 @@ module.exports = {
     devServer,
     // nodejs 顶层作用域不能用 module，所以加个下划线区分下
     module: _module,
+    // 确实会微小的提升打包速度 （注释掉 optimization 会比不注释慢半秒左右）
     optimization,
     plugins
 }
