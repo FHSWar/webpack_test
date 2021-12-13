@@ -1,5 +1,6 @@
 const { loopWhile } = require('deasync')
 const ESLintPlugin = require('eslint-webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
@@ -8,6 +9,7 @@ const { networkInterfaces } = require('os');
 const { resolve } = require('path')
 const { getPort } = require('portfinder');
 const { VueLoaderPlugin } = require("vue-loader")
+const webpack = require('webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const [HTMLPlugins, Entries] = require('./pages.config')
 
@@ -35,6 +37,8 @@ const basic = {
             '@images': resolve(__dirname, '../src/public/images'),
             '@utils': resolve(__dirname, '../src/public/utils'),
         },
+        // 用来支持 ts
+        extensions: [".ts", ".tsx", ".js"]
     },
 }
 
@@ -72,6 +76,21 @@ const _module = {
             use: {
                 loader: 'babel-loader'
             }
+        },
+        // 用于编译 ts
+        {
+            test: /\.(t|j)s$/,
+            exclude: /node_modules/,
+            use: [
+                {
+                    loader: 'ts-loader',
+                    options: {
+                        // 对应文件添加个.ts或.tsx后缀
+                        appendTsSuffixTo: [/\.vue$/],
+                        transpileOnly: true
+                    },
+                },
+            ],
         },
         {
             test: /\.(s[ac]|c)ss$/i,
@@ -111,6 +130,11 @@ const plugins = [
         fix: true,
         extensions: ['js', 'json', 'vue'],
     }),
+    // 用于加速编译
+    new ForkTsCheckerWebpackPlugin({
+        // 用这插件又用 eslint 就要加这一句
+        eslint: { files: './src/**/*.{ts,tsx,js,jsx}' }
+    }),
     new FriendlyErrorsWebpackPlugin({
         compilationSuccessInfo: {
             messages: [
@@ -133,7 +157,12 @@ const plugins = [
         chunkFilename: "[name]/[id]-[contenthash].css"
     }),
     ...HTMLPlugins,
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    // 不加这个会报警告
+    new webpack.DefinePlugin({
+        __VUE_OPTIONS_API__: false,
+        __VUE_PROD_DEVTOOLS__: false,
+    }),
 ]
 
 function getUsablePort(customPort) {
