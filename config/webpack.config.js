@@ -58,7 +58,7 @@ const _module = {
             }
         },
         {
-            test: /\.(gif|jpg?g|png)$/i,
+            test: /\.(gif|jpe?g|png)$/i,
             type: 'asset',
             parser: {
                 dataUrlCondition: {
