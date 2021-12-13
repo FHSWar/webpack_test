@@ -1,3 +1,6 @@
+<script setup>
+</script>
+
 <template>
   <!-- 即使图片放在了 images 里面，由于 pulic/images 里面有相同图片，打包出来就只有一份 -->
   <div>
@@ -31,33 +34,13 @@
   </div>
 </template>
 
-<script>
-// 写个 script 单行注释测试打生产包去除注释
-/* 写个 script 多行注释测试打生产包去除注释 */
-export default {
-	data() {
-		return {
-			sth: 'sth'
-		}
-	},
-	methods: {
-		console() {
-			console.log('amazing!')
-		}
-	}
-}
-</script>
 
 
 <style lang="scss">
-// @use "./styles/index.scss";
-
-
 .wrapper {
     display: flex;
     .big-pic {
         width: 200px;
-        // height: 200px;
         overflow: hidden;
     }
     .small-pic {

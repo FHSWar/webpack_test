@@ -1,3 +1,6 @@
+<script setup>
+</script>
+
 <template>
   <div>
     <h1>页面一</h1>
@@ -38,30 +41,19 @@
   </div>
 </template>
 
-<script>
-// 写个 script 单行注释测试打生产包去除注释
-/* 写个 script 多行注释测试打生产包去除注释 */
-export default {
-    
-}
-</script>
+
 
 
 <style lang="scss">
-// @use "./styles/index.scss";
-
-
 .wrapper {
     display: flex;
     .big-pic {
         width: 200px;
-        // height: 200px;
         overflow: hidden;
     }
     .small-pic {
         width: 200px;
         height: 200px;
-        // background-image: url(/Users/fhs_war/Documents/trainHall/webpack_test/src/images/me.jpg);
         background-image: url(@images/me.jpg);
         background-size: contain;
     }
