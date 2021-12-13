@@ -67,7 +67,7 @@ const _module = {
             }
         },
         {
-            test: /\.(gif|jpg?g|png)$/i,
+            test: /\.(gif|jpe?g|png)$/i,
             // 用于取代 webpack 的 file-loade，url-loader，自带超强压缩！
             // 只要文件相同，最后打包出来hash相同，也就是只会有一份，也就是说项目里图片重复了也不会影响包的大小
             type: 'asset',
