@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import tsxTest from './views/tsxTest'
+import { ref } from 'vue'
 const year = ref(2020)
 year.value = 2021
 </script>

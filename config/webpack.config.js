@@ -77,21 +77,6 @@ const _module = {
                 loader: 'babel-loader'
             }
         },
-        // 用于编译 ts
-        {
-            test: /\.(t|j)s$/,
-            exclude: /node_modules/,
-            use: [
-                {
-                    loader: 'ts-loader',
-                    options: {
-                        // 对应文件添加个.ts或.tsx后缀
-                        appendTsSuffixTo: [/\.vue$/],
-                        transpileOnly: true
-                    },
-                },
-            ],
-        },
         {
             test: /\.(s[ac]|c)ss$/i,
             use: [MiniCSSExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']

@@ -1,5 +1,4 @@
 module.exports = {
-	// 'parser': 'vue-eslint-parser',
 	'env': {
 		'browser': true,
 		'es2021': true
