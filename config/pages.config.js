@@ -13,16 +13,18 @@ pagesArr.map(page => {
     // 既然 ts 了，各种 js 都应该改为 ts。只要入口文件是 ts，其他文件也会被强制要求为 ts。
     const pageEntry = pagePath + '/index.ts'
 
-    if (!fs.existsSync(pageTemplate)) throw new Error('对应目录下没有 index.html')
-
-    const htmlPlugin = new HTMLWebpackPlugin({
-        filename: `${page}.html`,
-        template: pageTemplate,
-        chunks: [page]
-    });
-
-    HTMLPlugins.push(htmlPlugin);
-    Entries[page] = [pageEntry]
+    if(fs.existsSync(pageTemplate)) {
+        const htmlPlugin = new HTMLWebpackPlugin({
+            filename: `${page}.html`,
+            template: pageTemplate,
+            chunks: [page]
+        });
+    
+        HTMLPlugins.push(htmlPlugin);
+        Entries[page] = [pageEntry]
+    } else {
+        console.log(`${pageTemplate} 目录下没有 index.html`)
+    }
 })
 
 module.exports = [HTMLPlugins, Entries]
