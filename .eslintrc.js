@@ -21,7 +21,8 @@ module.exports = {
 		'computed-property-spacing': ['error', 'never'],
 		'indent': ['error', 'tab'],
 		'linebreak-style': ['error', 'unix'],
-		'no-multi-spaces': ["error", { ignoreEOLComments: false }],
+		'no-multi-spaces': ['error', { ignoreEOLComments: false }],
+		'no-trailing-spaces': 'error',
 		'quotes': ['error', 'single'],
 		'semi': ['error', 'never']
 	}
