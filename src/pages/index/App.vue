@@ -6,9 +6,10 @@ year.value = 2021
 </script>
 
 <template>
-  <div>
+  <div class="bg-gray-400">
     <h1>页面一</h1>
     {{ year }}
+    <span class="btn btn-blue">结合@apply就可以像写类一样写 tailwindcss 了</span>
     <!-- 写个模版注释测试打包去除注释 -->
     <div class="wrapper">
       <span>来个svg</span>
@@ -23,7 +24,7 @@ year.value = 2021
       <span>来个png</span>
       <img :src="require('@images/png.png')" width="300" alt="png" />
     </div>
-    <tsxTest/>
+    <tsxTest />
     <router-link to="/">Home</router-link>|
     <router-link to="/about">About</router-link>
     <router-view />
@@ -34,6 +35,14 @@ year.value = 2021
 
 
 <style lang="scss">
+@import "@styles/tailwind.css";
+.btn {
+  @apply font-bold py-2 px-4 rounded;
+}
+.btn-blue {
+  @apply bg-blue-500 hover:bg-blue-700 text-white;
+}
+
 .wrapper {
   display: flex;
   .big-pic {

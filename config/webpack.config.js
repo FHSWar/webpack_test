@@ -35,6 +35,7 @@ const basic = {
 			'@fonts': resolve(__dirname, '../src/public/fonts'),
 			'@icons': resolve(__dirname, '../src/public/icons'),
 			'@images': resolve(__dirname, '../src/public/images'),
+			'@styles': resolve(__dirname, '../src/public/styles'),
 			'@utils': resolve(__dirname, '../src/public/utils')
 		},
 		// 用来支持 ts
@@ -128,6 +129,7 @@ const plugins = [
 			]
 		}
 	}),
+	...HTMLPlugins,
 	new ImageMinimizerPlugin({
 		minimizerOptions: {
 			plugins: [
@@ -141,7 +143,6 @@ const plugins = [
 		filename: '[name]/[contenthash].css',
 		chunkFilename: '[name]/[id]-[contenthash].css'
 	}),
-	...HTMLPlugins,
 	new VueLoaderPlugin(),
 	// 不加这个会报警告
 	new webpack.DefinePlugin({
