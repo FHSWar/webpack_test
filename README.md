@@ -40,8 +40,6 @@
   >
   > ​				|-- `shim-vue.d.ts`（ts 版本才需要，vue3 项目需要的类型声明文件。）
   >
-  > ​		|-- `.browserslistrc`（babel 和 postcss 用的，声明应该支持到多旧的浏览器。）
-  >
   > ​		|-- `.eslintrc.js`
   >
   > ​		|-- `.gitignore`（声明 git 不应该监听的指定路径下的文件）
@@ -50,11 +48,15 @@
   >
   > ​		|-- `package.json`
   >
-  > ​		|-- `postcss.config.js`（清除打包后 css 注释，css 语法向后兼容，多浏览器兼容。）
+  > ​				|-- browserslist（babel 和 postcss 用的，声明应该支持到多旧的浏览器。）
+  >
+  > ​				|-- postcss（清除打包后 css 注释，css 语法向后兼容，多浏览器兼容。）
   >
   > ​		|-- `tsconfig.json`（仅 ts，指定静态类型检查和语法提示的细则。）
   >
   > ​		|-- `yarn.lock`（用的是 yarn，会有这个 lock，用于保证 install 依赖一致。）
+
+  > 补充：`package.json` 中的配置项可以独立为配置文件，但因为内容简单，为了保持根目录清爽，于是收入 `package.json` 中，起到的作用是相同的。
 
 ## 主要文件夹
 
@@ -80,8 +82,9 @@
   - 强制最后一行无逗号；
   - 强制 tab 缩进；
   - 强制 unix 风格的换行；
-  - 强制无冗余空格；
-  - 强制无分号。
+  - 强制代码间无冗余空格；
+    - 强制代码末尾无冗余空格；
+    - 强制无分号。
 
 - eslint 的依赖是
 
@@ -172,7 +175,7 @@
 
 ### babel，postcss，sass
 
-- babel 的依赖，loader 用于将 babel 注入 webpack 处理流：
+- babel 的依赖，loader 用于将 babel 注入 webpack 处理流，babel 还能使项目用新语法，jsx，ts等：
   - "@babel/core"
   - "@babel/preset-env"
   - "babel-loader"
@@ -204,10 +207,21 @@
   - "@typescript-eslint/parser"（支持 ts。）
   - "@vue/eslint-config-typescript"（带 ts 的 eslint 支持 vue。）
 
+### husky
+
+- "husky"
+  （新增 `.husky` 文件夹，利用 githooks 做一些优化，如 commit 前 lint 和 commit-message 校验。）
+- "lint-staged"（只针对 staged 状态的文件 lint，提高 lint 效率。）
+
 ### typescript
 
-- "ts-loader"（将 ts 注入 webpack 处理流，还能处理 vue 文件中的 ts。）
+- "@babel/preset-typescript"
+  （将 ts 注入 babel 处理流，还能处理 vue 文件中的 ts。比再加个 ts-loader 的效率高。）
 - "typescript" (编译 ts。)
+
+### tsx
+
+- "@vue/babel-plugin-jsx"
 
 ### 其他
 
@@ -227,7 +241,8 @@
 
 #### 速度最大化
 
-- "fork-ts-checker-webpack-plugin"（将 ts 静态类型检查，编译和 eslint 检查分给其他线程，提升热加载和打包速度。）
+- "fork-ts-checker-webpack-plugin"
+  （将 ts 静态类型检查，编译和 eslint 检查分给其他线程，提升热加载和打包速度。）
 
 #### 控制台输出美化
 
@@ -235,9 +250,12 @@
 
 #### 多页面
 
-- "html-webpack-plugin"（new 不同的文件，结合 entry 数组，打包出多个 html 文件作为多个页面的入口。）
+- "html-webpack-plugin"
+  （new 不同的文件，结合 entry 数组，打包出多个 html 文件作为多个页面的入口。）
 
 #### 多启动
 
+- "os" 模块的 networkInterfaces
 - "deasync"
-- "portfinder"（查找可用端口，deasync 将这个异步方法转为阻塞，实现多次启动同一工程能在指定端口上自增。）
+- "portfinder"
+  （查找可用端口，deasync 将这个异步方法转为阻塞，实现多次启动同一工程能在指定端口上自增。）
