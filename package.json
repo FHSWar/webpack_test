@@ -1,6 +1,7 @@
 {
+  "author": "DUJINHUA506 <fhswar0504@163.com>",
+  "license": "MIT",
   "private": true,
-  "main": "index.js",
   "scripts": {
     "anls": "cross-env NODE_ENV=analysis webpack --config config/webpack.config",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.config",
