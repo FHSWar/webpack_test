@@ -1,4 +1,6 @@
 {
+  "author": "DUJINHUA506 <fhswar0504@163.com>",
+  "license": "MIT",
   "private": true,
   "main": "index.js",
   "scripts": {
@@ -83,7 +85,6 @@
       "git add"
     ]
   },
-  "packageManager": "pnpm",
   "postcss": {
     "plugins": {
       "postcss-preset-env": {},
