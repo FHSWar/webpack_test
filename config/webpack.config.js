@@ -79,7 +79,7 @@ const _module = {
 		},
 		{
 			test: /\.(s[ac]|c)ss$/i,
-			use: [MiniCSSExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
+			use: ['css-loader', 'postcss-loader', 'sass-loader']
 		},
 		{
 			test: /\.svg$/i,
@@ -169,15 +169,18 @@ switch (true) {
 case isAnls:
 	basic.mode = DEVELOPMENT,
 	plugins.push(new BundleAnalyzerPlugin())
+	_module['rules'][3]['use'].unshift(MiniCSSExtractPlugin.loader)
 	break
 case isDev:
 	basic.mode = DEVELOPMENT,
 	basic.stats = 'errors-warnings',
 	basic.devtool = 'source-map'
+	_module['rules'][3]['use'].unshift('style-loader') 
 	break
 case isProd:
 	basic.mode = PRODUCTION
 	basic.devtool = false
+	_module['rules'][3]['use'].unshift(MiniCSSExtractPlugin.loader)
 	break
 }
 

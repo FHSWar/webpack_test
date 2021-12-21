@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import tsxTest from './views/tsxTest'
+import home from './views/homeHome.vue'
 import { ref } from 'vue'
 const year = ref(2020)
 year.value = 2021
@@ -24,6 +25,7 @@ year.value = 2021
       <img :src="require('@images/png.png')" width="300" alt="png" />
     </div>
     <tsxTest/>
+    <home />
     <router-link to="/">Home</router-link>|
     <router-link to="/about">About</router-link>
     <router-view />

@@ -1,18 +1,15 @@
+<script lang="ts" setup>
+import one from './homeHome.vue'
+</script>
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+	<div class="about">
+		<h1>This is an about page123</h1>
+		<one/>
+	</div>
 </template>
 
-<script>
-export default {
-	name: 'ComponentAbout',
-	mounted() {
-		console.log('ComponentAbout')
-	}
+<style lang="scss" scoped>
+h1 {
+	color: red;
 }
-</script>
-
-<style>
-
 </style>

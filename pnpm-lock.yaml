@@ -41,6 +41,7 @@ specifiers:
   postcss-preset-env: ^6.7.0
   sass: ^1.45.0
   sass-loader: ^12.4.0
+  style-loader: ^3.3.1
   svgo-loader: ^3.0.0
   ts-loader: ^9.2.6
   typescript: ^4.5.4
@@ -99,6 +100,7 @@ devDependencies:
   postcss-preset-env: 6.7.0
   sass: 1.45.0
   sass-loader: 12.4.0_sass@1.45.0+webpack@5.65.0
+  style-loader: 3.3.1_webpack@5.65.0
   svgo-loader: 3.0.0
   ts-loader: 9.2.6_typescript@4.5.4+webpack@5.65.0
   typescript: 4.5.4
@@ -6703,6 +6705,15 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       escape-string-regexp: 1.0.5
+    dev: true
+
+  /style-loader/3.3.1_webpack@5.65.0:
+    resolution: {integrity: sha512-GPcQ+LDJbrcxHORTRes6Jy2sfvK2kS6hpSfI/fXhPt+spVzxF6LJ1dHLN9zIGmVaaP044YKaIatFaufENRiDoQ==, tarball: style-loader/download/style-loader-3.3.1.tgz}
+    engines: {node: '>= 12.13.0'}
+    peerDependencies:
+      webpack: ^5.0.0
+    dependencies:
+      webpack: 5.65.0_webpack-cli@4.9.1
     dev: true
 
   /supports-color/2.0.0:
