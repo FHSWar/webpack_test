@@ -80,7 +80,7 @@ const _module = {
 		},
 		{
 			test: /\.(s[ac]|c)ss$/i,
-			use: [MiniCSSExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
+			use: ['css-loader', 'postcss-loader', 'sass-loader']
 		},
 		{
 			test: /\.svg$/i,
@@ -124,8 +124,8 @@ const plugins = [
 	new FriendlyErrorsWebpackPlugin({
 		compilationSuccessInfo: {
 			messages: [
-				`You application is running here: http://localhost:${port}`,
-				`You can also visit it by: http://${IP}:${port}`
+				`Local: http://localhost:${port}`,
+				`Network: http://${IP}:${port}`
 			]
 		}
 	}),
@@ -167,19 +167,22 @@ function getUsablePort(customPort) {
 }
 
 switch (true) {
-case isAnls:
-	basic.mode = DEVELOPMENT,
-	plugins.push(new BundleAnalyzerPlugin())
-	break
-case isDev:
-	basic.mode = DEVELOPMENT,
-	basic.stats = 'errors-warnings',
-	basic.devtool = 'source-map'
-	break
-case isProd:
-	basic.mode = PRODUCTION
-	basic.devtool = false
-	break
+	case isAnls:
+		basic.mode = DEVELOPMENT,
+			plugins.push(new BundleAnalyzerPlugin())
+		_module['rules'][3]['use'].unshift(MiniCSSExtractPlugin.loader)
+		break
+	case isDev:
+		basic.mode = DEVELOPMENT,
+			basic.stats = 'errors-warnings',
+			basic.devtool = 'source-map'
+		_module['rules'][3]['use'].unshift('style-loader')
+		break
+	case isProd:
+		basic.mode = PRODUCTION
+		basic.devtool = false
+		_module['rules'][3]['use'].unshift(MiniCSSExtractPlugin.loader)
+		break
 }
 
 module.exports = {

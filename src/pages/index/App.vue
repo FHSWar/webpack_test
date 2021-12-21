@@ -35,12 +35,11 @@ year.value = 2021
 
 
 <style lang="scss">
-@import "@styles/tailwind.css";
 .btn {
   @apply font-bold py-2 px-4 rounded;
 }
 .btn-blue {
-  @apply bg-blue-500 hover:bg-blue-700 text-white;
+  @apply bg-green-500 hover:bg-blue-700 text-white;
 }
 
 .wrapper {
@@ -51,7 +50,7 @@ year.value = 2021
   }
   .small-pic {
     width: 200px;
-    height: 200px;
+    height: 150px;
     background-image: url(@images/me.jpg);
     background-size: contain;
   }
