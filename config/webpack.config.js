@@ -123,8 +123,8 @@ const plugins = [
 	new FriendlyErrorsWebpackPlugin({
 		compilationSuccessInfo: {
 			messages: [
-				`You application is running here: http://localhost:${port}`,
-				`You can also visit it by: http://${IP}:${port}`
+				`Local: http://localhost:${port}`,
+				`Network: http://${IP}:${port}`
 			]
 		}
 	}),
