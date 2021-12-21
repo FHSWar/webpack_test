@@ -1,3 +1,5 @@
+const CompressionPlugin = require('compression-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const { loopWhile } = require('deasync')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
@@ -8,6 +10,7 @@ const MiniSVGDataURI = require('mini-svg-data-uri')
 const { networkInterfaces } = require('os')
 const { resolve } = require('path')
 const { getPort } = require('portfinder')
+const TerserPlugin = require('terser-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const webpack = require('webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
@@ -80,7 +83,7 @@ const _module = {
 		},
 		{
 			test: /\.(s[ac]|c)ss$/i,
-			use: [MiniCSSExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
+			use: ['css-loader', 'postcss-loader', 'sass-loader']
 		},
 		{
 			test: /\.svg$/i,
@@ -105,12 +108,6 @@ const _module = {
 	]
 }
 
-const optimization = {
-	splitChunks: {
-		chunks: 'all'
-	}
-}
-
 const plugins = [
 	new ESLintPlugin({
 		fix: true,
@@ -124,21 +121,12 @@ const plugins = [
 	new FriendlyErrorsWebpackPlugin({
 		compilationSuccessInfo: {
 			messages: [
-				`You application is running here: http://localhost:${port}`,
-				`You can also visit it by: http://${IP}:${port}`
+				`Local: http://localhost:${port}`,
+				`Network: http://${IP}:${port}`
 			]
 		}
 	}),
 	...HTMLPlugins,
-	new ImageMinimizerPlugin({
-		minimizerOptions: {
-			plugins: [
-				['gifsicle', { interlaced: true }],
-				['mozjpeg', { quality: 80 }],
-				['pngquant', { quality: [0.6, 0.8] }]
-			]
-		}
-	}),
 	new MiniCSSExtractPlugin({
 		filename: '[name]/[contenthash].css',
 		chunkFilename: '[name]/[id]-[contenthash].css'
@@ -150,6 +138,17 @@ const plugins = [
 		__VUE_PROD_DEVTOOLS__: false
 	})
 ]
+
+let optimization = {
+	minimize: true,
+	minimizer: [
+		new CssMinimizerPlugin(),
+		new TerserPlugin()
+	],
+	splitChunks: {
+		chunks: 'all'
+	}
+}
 
 function getUsablePort(customPort) {
 	getPort(
@@ -167,19 +166,38 @@ function getUsablePort(customPort) {
 }
 
 switch (true) {
-case isAnls:
-	basic.mode = DEVELOPMENT,
-	plugins.push(new BundleAnalyzerPlugin())
-	break
-case isDev:
-	basic.mode = DEVELOPMENT,
-	basic.stats = 'errors-warnings',
-	basic.devtool = 'source-map'
-	break
-case isProd:
-	basic.mode = PRODUCTION
-	basic.devtool = false
-	break
+	case isAnls:
+		basic.mode = DEVELOPMENT,
+		plugins.push(new BundleAnalyzerPlugin())
+		_module['rules'][3]['use'].unshift(MiniCSSExtractPlugin.loader)
+		break
+	// 开发模式
+	case isDev:
+		basic.mode = DEVELOPMENT,
+		basic.stats = 'errors-warnings'
+		// 方便开发定位代码
+		basic.devtool = 'eval'
+		// contenthash 导致抽取 css 会使 HMR 失效
+		_module['rules'][3]['use'].unshift('style-loader')
+		// 不需要优化，不开可以缩短启动和热更新时间
+		optimization = {}
+		break
+	case isProd:
+		basic.mode = PRODUCTION
+		_module['rules'][3]['use'].unshift(MiniCSSExtractPlugin.loader),
+		plugins.unshift(
+			new CompressionPlugin(),
+			new ImageMinimizerPlugin({
+				minimizerOptions: {
+					plugins: [
+						['gifsicle', { interlaced: true }],
+						['mozjpeg', { quality: 80 }],
+						['pngquant', { quality: [0.6, 0.8] }]
+					]
+				}
+			})
+		)
+		break
 }
 
 module.exports = {
