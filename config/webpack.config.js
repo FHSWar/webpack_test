@@ -92,7 +92,7 @@ const _module = {
             test: /\.(s[ac]|c)ss$/i,
             // 不加 scss loader 不会报错但是 scss 文件会不生效
             // postcss-loader 应该在 sass-loader 前面，虽然反过来也不报错，但 postcss-loader 就会失效，因为没加到前缀
-            use: [MiniCSSExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
+            use: ['css-loader', 'postcss-loader', 'sass-loader']
         },
         {
             test: /\.svg$/i,
@@ -133,8 +133,8 @@ const plugins = [
     new FriendlyErrorsWebpackPlugin({
         compilationSuccessInfo: {
             messages: [
-                `You application is running here: http://localhost:${port}`,
-                `You can also visit it by: http://${IP}:${port}`
+                `Local: http://localhost:${port}`,
+                `Network: http://${IP}:${port}`
             ],
         },
     }),
@@ -197,6 +197,7 @@ switch(true) {
     case isAnls:
         basic.mode = DEVELOPMENT,
         plugins.push(new BundleAnalyzerPlugin())
+        _module['rules'][3]['use'].unshift(MiniCSSExtractPlugin.loader)
         break
     // 提供 source-map，方便调适
     case isDev:
@@ -206,13 +207,16 @@ switch(true) {
         basic.stats = 'errors-warnings',
         // devTool 用来看到 babel 之前的代码，方便调试
         basic.devtool = 'source-map'
+        _module['rules'][3]['use'].unshift('style-loader')
         break
     // 最小化打包，最大化性能
     case isProd:
         basic.mode = PRODUCTION
         basic.devtool = false
+        _module['rules'][3]['use'].unshift(MiniCSSExtractPlugin.loader)
         break
 }
+
 
 module.exports = {
     ...basic,

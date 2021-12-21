@@ -56,7 +56,7 @@ export default {
     .big-pic {
         width: 200px;
         // height: 200px;
-        overflow: hidden;
+        // overflow: hidden;
     }
     .small-pic {
         width: 200px;
