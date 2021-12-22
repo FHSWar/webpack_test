@@ -1,4 +1,7 @@
 const {
+	plugins: analysisPlugins
+} = require('./analysis.config')
+const {
 	entry,
 	output,
 	cache,
@@ -14,11 +17,6 @@ const {
 	optimization,
 	plugins: productionPlugins
 } = require('./production.config')
-const {
-	plugins: analysisPlugins
-} = require('./analysis.config')
-
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 
 let mode, stats, devtool, plugins = []
 const PRODUCTION = 'production', DEVELOPMENT = 'development', ANALYSIS = 'analysis'
@@ -29,7 +27,7 @@ const isProd = process.env.NODE_ENV === PRODUCTION
 // 分析和生产模式共有的
 if (isAnls || isProd) {
 	mode = PRODUCTION
-	_module['rules'][3]['use'].unshift(MiniCSSExtractPlugin.loader)
+	_module['rules'][3]['use'].unshift(require('mini-css-extract-plugin').loader)
 	// 分析生产包才有价值，除了分析专用插件，其它插件 prod 有的 anls 也要有
 	plugins.push(...productionPlugins)
 }
