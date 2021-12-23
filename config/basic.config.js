@@ -25,11 +25,10 @@ const output = {
 	assetModuleFilename: 'assets/[contenthash][ext]',
 	clean: true
 }
-// const cache = {
-// 	type: 'filesystem',
-// 	allowCollectingMemory: true,
-// }
-const cache = false
+const cache = {
+	type: 'filesystem',
+	allowCollectingMemory: true,
+}
 const _module = {
 	rules: [
 		{
