@@ -1,9 +1,11 @@
+const { analysisPlugin } = require('../customize.config')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const plugins = []
 
-const plugins = [
-    new BundleAnalyzerPlugin()
-]
-
+switch (analysisPlugin) {
+    default:
+        plugins.push(new BundleAnalyzerPlugin())
+}
 module.exports = {
     plugins
 }

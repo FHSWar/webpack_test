@@ -17,12 +17,16 @@ const {
 	optimization,
 	plugins: productionPlugins
 } = require('./production.config')
+const {
+    DEVELOPMENT,
+    PRODUCTION,
+	isAnls,
+	isDev,
+	isProd
+} = require('./environment.config')
 
 let mode, stats, devtool, plugins = []
-const PRODUCTION = 'production', DEVELOPMENT = 'development', ANALYSIS = 'analysis'
-const isAnls = process.env.NODE_ENV === ANALYSIS
-const isDev = process.env.NODE_ENV === DEVELOPMENT
-const isProd = process.env.NODE_ENV === PRODUCTION
+
 
 // 分析和生产模式共有的
 if (isAnls || isProd) {

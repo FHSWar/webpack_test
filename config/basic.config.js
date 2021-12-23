@@ -1,12 +1,23 @@
+const { noInlineProjects } = require('../customize.config')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const MiniSVGDataURI = require('mini-svg-data-uri')
 const [HTMLPlugins, Entries] = require('./pages.config')
-const {resolve} = require('path')
+const { resolve } = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 const webpack = require('webpack')
 
+// 当没有声明不能内联且图片小于 4kb 时转为内联图片。
+function dataUrlConditionHandler(source, { filename }) {
+	const noInline = noInlineProjects.map(project => {
+		return resolve(__dirname, `../src/pages/${project}`)
+	}).map(abs => filename.includes(abs)).filter(flag => flag === true)[0]
+	if (!noInline && source.length < 4 * 1024) {
+		console.log('filename', filename)
+		return true
+	}
+}
 
 const entry = Entries
 const output = {
@@ -14,10 +25,11 @@ const output = {
 	assetModuleFilename: 'assets/[contenthash][ext]',
 	clean: true
 }
-const cache =  {
-	type: 'filesystem',
-	allowCollectingMemory: true,
-}
+// const cache = {
+// 	type: 'filesystem',
+// 	allowCollectingMemory: true,
+// }
+const cache = false
 const _module = {
 	rules: [
 		{
@@ -36,9 +48,7 @@ const _module = {
 			test: /\.(gif|jpe?g|png)$/i,
 			type: 'asset',
 			parser: {
-				dataUrlCondition: {
-					maxSize: 4 * 1024
-				}
+				dataUrlCondition: dataUrlConditionHandler
 			}
 		},
 		{
@@ -57,7 +67,7 @@ const _module = {
 			type: 'asset',
 			parser: {
 				dataUrlCondition: {
-					maxSize: 12 * 1024
+					maxSize: 8 * 1024
 				}
 			},
 			generator: {
@@ -110,10 +120,10 @@ const _resolve = {
 }
 
 module.exports = {
-    entry,
-    output,
-    cache,
-    _resolve,
-    _module,
-    plugins
+	entry,
+	output,
+	cache,
+	_resolve,
+	_module,
+	plugins
 }

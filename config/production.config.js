@@ -1,14 +1,30 @@
 const CompressionPlugin = require('compression-webpack-plugin')
+const { noMinifyProjects } = require('../customize.config')
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin')
+const { resolve } = require('path')
 
 const optimization = {
-	splitChunks: {
-		chunks: 'all'
-	}
+    splitChunks: {
+        chunks: 'all'
+    }
 }
 const plugins = [
     new CompressionPlugin(),
     new ImageMinimizerPlugin({
+        filter: (_, sourcePath) => {
+            const noMinify = noMinifyProjects
+                .map(project => {
+                    return resolve(__dirname, `../src/pages/${project}`)
+                })
+                .map(abs => `${process.cwd()}/${sourcePath}`.includes(abs))
+                .filter(flag => flag === true)[0]
+            if (noMinify) {
+                console.log('filename', sourcePath)
+                return false
+            }else{
+                return true
+            }
+        },
         minimizerOptions: {
             plugins: [
                 ['gifsicle', { interlaced: true }],
