@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.config",
     "build-dev": "cross-env NODE_ENV=development webpack --config config/webpack.config",
     "dev": "cross-env NODE_ENV=development webpack serve --config config/webpack.config",
-    "lint": "eslint --fix --ext .ts,.tsx,.vue ./src/**/*.{ts,tsx,vue}",
+    "lint": "eslint --fix --ext .js,.vue ./src/**/*.{js,vue}",
     "prepare": "husky install",
     "watch": "cross-env NODE_ENV=production webpack --watch --config config/webpack.config"
   },
@@ -18,27 +18,21 @@
   ],
   "dependencies": {
     "axios": "^0.24.0",
+    "core-js": "^3.20.0",
     "dayjs": "^1.10.7",
-    "vue": "^3.2.26",
-    "vue-router": "^4.0.12",
-    "vuex": "^4.0.2"
+    "vue": "^2.6.14",
+    "vue-router": "^3.5.3",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/plugin-transform-runtime": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
-    "@babel/preset-typescript": "^7.16.5",
     "@babel/runtime": "^7.16.5",
     "@babel/runtime-corejs3": "^7.16.5",
-    "@typescript-eslint/eslint-plugin": "^5.7.0",
-    "@typescript-eslint/parser": "^5.7.0",
-    "@vue/babel-plugin-jsx": "^1.1.1",
-    "@vue/compiler-sfc": "^3.2.26",
-    "@vue/eslint-config-typescript": "9.1.0",
     "autoprefixer": "^10.4.0",
     "babel-loader": "^8.2.3",
     "compression-webpack-plugin": "^9.2.0",
-    "core-js": "^3.20.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.5.1",
     "cssnano": "^5.0.14",
@@ -47,7 +41,6 @@
     "eslint": "^8.5.0",
     "eslint-plugin-vue": "^8.2.0",
     "eslint-webpack-plugin": "^3.1.1",
-    "fork-ts-checker-webpack-plugin": "^6.5.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.4",
@@ -68,8 +61,8 @@
     "style-loader": "^3.3.1",
     "svgo-loader": "^3.0.0",
     "tailwindcss": "^3.0.7",
-    "typescript": "^4.5.4",
-    "vue-loader": "17.0.0",
+    "vue-loader": "15.9.8",
+    "vue-template-compiler": "^2.6.14",
     "webpack": "^5.65.0",
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.1",
@@ -81,7 +74,7 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx,vue}": [
+    "src/**/*.{js,vue}": [
       "eslint --fix",
       "git add"
     ]

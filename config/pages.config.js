@@ -35,8 +35,7 @@ pagesArr.length ? null : pagesArr.push(...fs.readdirSync(dest))
 pagesArr.map(page => {
 	const pagePath = resolve(page)
 	const pageTemplate = pagePath + '/index.html'
-	// 既然 ts 了，各种 js 都应该改为 ts。只要入口文件是 ts，其他文件也会被强制要求为 ts。
-	const pageEntry = pagePath + '/index.ts'
+	const pageEntry = pagePath + '/index.js'
 
 	if (fs.existsSync(pageTemplate)) {
 		const htmlPlugin = new HTMLWebpackPlugin({

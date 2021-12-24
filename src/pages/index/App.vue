@@ -1,17 +1,8 @@
-<script setup lang="ts">
-import tsxTest from './views/tsxTest'
-import { ref } from 'vue'
-const year = ref(2020)
-year.value = 2021
-</script>
-
 <template>
-  <div class="bg-gray-400">
+  <div>
     <h1>页面一</h1>
-    {{ year }}
-    <span class="btn btn-blue">结合@apply就可以像写类一样写 tailwindcss 了</span>
     <!-- 写个模版注释测试打包去除注释 -->
-    <div class="wrapper">
+    <div class="wrapper bg-red-400">
       <span>来个svg</span>
       <div>
         <img :src="require('@images/cat.svg')" width="200" alt="svg" />
@@ -24,33 +15,34 @@ year.value = 2021
       <span>来个png</span>
       <img :src="require('@images/png.png')" width="300" alt="png" />
     </div>
-    <tsxTest />
-    <router-link to="/">Home</router-link>|
-    <router-link to="/about">About</router-link>
+
+    <router-link to="/"> Home </router-link>|
+    <router-link to="/about"> About </router-link>
     <router-view />
   </div>
 </template>
 
-
+<script>
+// 写个 script 单行注释测试打生产包去除注释
+/* 写个 script 多行注释测试打生产包去除注释 */
+export default {}
+</script>
 
 
 <style lang="scss">
-.btn {
-  @apply font-bold py-2 px-4 rounded;
-}
-.btn-blue {
-  @apply bg-green-500 hover:bg-blue-700 text-white;
-}
+// @use "./styles/index.scss";
 
 .wrapper {
   display: flex;
   .big-pic {
     width: 200px;
-    overflow: hidden;
+    // height: 200px;
+    // overflow: hidden;
   }
   .small-pic {
     width: 200px;
-    height: 150px;
+    height: 200px;
+    // background-image: url(/Users/fhs_war/Documents/trainHall/webpack_test/src/images/me.jpg);
     background-image: url(@images/me.jpg);
     background-size: contain;
   }
