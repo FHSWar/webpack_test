@@ -1,5 +1,5 @@
-<script setup lang="ts">
-const aB: number[] = [2, 3]
+<script setup>
+const aB = [2, 3]
 </script>
 
 <template>
@@ -11,15 +11,27 @@ const aB: number[] = [2, 3]
     <div class="wrapper">
       <span>来个svg</span>
       <div>
-        <img src="./images/cat.svg" width="200" alt="svg" />
+        <img
+          src="./images/cat.svg"
+          width="200"
+          alt="svg"
+        />
       </div>
       <span>来两个jpg</span>
       <div class="big-pic">
-        <img src="./images/tree.jpg" width="200" alt="jpg" />
+        <img
+          src="./images/tree.jpg"
+          width="200"
+          alt="jpg"
+        />
       </div>
       <div class="small-pic" />
       <span>来个png</span>
-      <img src="./images/png.png" width="300" alt="png" />
+      <img
+        src="./images/png.png"
+        width="300"
+        alt="png"
+      />
     </div>
   </div>
 </template>

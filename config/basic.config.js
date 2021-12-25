@@ -1,6 +1,5 @@
 const { noInlineProjects } = require('../customize.config')
 const ESLintPlugin = require('eslint-webpack-plugin')
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const MiniSVGDataURI = require('mini-svg-data-uri')
 const [HTMLPlugins, Entries] = require('./pages.config')
@@ -51,7 +50,7 @@ const _module = {
 			}
 		},
 		{
-			test: /\.(t|j)sx?$/,
+			test: /\.jsx?$/,
 			exclude: /node_modules/,
 			use: {
 				loader: 'babel-loader'
@@ -86,12 +85,7 @@ const _module = {
 const plugins = [
 	new ESLintPlugin({
 		fix: true,
-		extensions: ['js', 'jsx', 'json', 'ts', 'tsx', 'vue']
-	}),
-	// 用于加速编译
-	new ForkTsCheckerWebpackPlugin({
-		// 用这插件又用 eslint 就要加这一句
-		eslint: { files: './src/**/*.{ts,tsx,js,jsx}' }
+		extensions: ['js', 'jsx', 'json', 'vue']
 	}),
 	...HTMLPlugins,
 	new MiniCSSExtractPlugin({
@@ -114,8 +108,7 @@ const _resolve = {
 		'@styles': resolve(__dirname, '../src/public/styles'),
 		'@utils': resolve(__dirname, '../src/public/utils')
 	},
-	// 用来支持 ts
-	extensions: ['.ts', '.tsx', '.js']
+	extensions: ['.js', '.jsx']
 }
 
 module.exports = {

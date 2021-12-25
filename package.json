@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.config",
     "build-dev": "cross-env NODE_ENV=development webpack --config config/webpack.config",
     "dev": "cross-env NODE_ENV=development webpack serve --config config/webpack.config",
-    "lint": "eslint --fix --ext .ts,.tsx,.vue ./src/**/*.{ts,tsx,vue}",
+    "lint": "eslint --fix --ext .js,.jsx,.vue ./src/**/*.{js,jsx,vue}",
     "prepare": "husky install",
     "watch": "cross-env NODE_ENV=production webpack --watch --config config/webpack.config"
   },
@@ -25,16 +25,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
+    "@babel/eslint-parser": "^7.16.5",
     "@babel/plugin-transform-runtime": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
-    "@babel/preset-typescript": "^7.16.5",
     "@babel/runtime": "^7.16.5",
     "@babel/runtime-corejs3": "^7.16.5",
-    "@typescript-eslint/eslint-plugin": "^5.7.0",
-    "@typescript-eslint/parser": "^5.7.0",
     "@vue/babel-plugin-jsx": "^1.1.1",
     "@vue/compiler-sfc": "^3.2.26",
-    "@vue/eslint-config-typescript": "9.1.0",
     "autoprefixer": "^10.4.0",
     "babel-loader": "^8.2.3",
     "compression-webpack-plugin": "^9.2.0",
@@ -47,7 +44,6 @@
     "eslint": "^8.5.0",
     "eslint-plugin-vue": "^8.2.0",
     "eslint-webpack-plugin": "^3.1.1",
-    "fork-ts-checker-webpack-plugin": "^6.5.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.4",
@@ -68,7 +64,6 @@
     "style-loader": "^3.3.1",
     "svgo-loader": "^3.0.0",
     "tailwindcss": "^3.0.7",
-    "typescript": "^4.5.4",
     "vue-loader": "17.0.0",
     "webpack": "^5.65.0",
     "webpack-bundle-analyzer": "^4.5.0",
@@ -81,7 +76,7 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx,vue}": [
+    "src/**/*.{js,jsx,vue}": [
       "eslint --fix",
       "git add"
     ]

@@ -4,12 +4,10 @@ module.exports = {
 		'es2021': true
 	},
 	'extends': [
-		'eslint:recommended',
-		'plugin:@typescript-eslint/recommended',
-		'plugin:vue/vue3-essential',
-		'@vue/typescript/recommended'
+		'plugin:vue/vue3-strongly-recommended'
 	],
 	'parserOptions': {
+		'parser': '@babel/eslint-parser',
 		'ecmaVersion': 13,
 		'sourceType': 'module'
 	},
@@ -24,6 +22,12 @@ module.exports = {
 		'no-multi-spaces': ['error', { ignoreEOLComments: false }],
 		'no-trailing-spaces': 'error',
 		'quotes': ['error', 'single'],
-		'semi': ['error', 'never']
+		'semi': ['error', 'never'],
+		'vue/html-self-closing': ["error", { 'html': { 'void': 'always' } }],
+		'vue/max-attributes-per-line': ['error', {
+			'singleline': { 'max': 5 },
+			'multiline': { 'max': 5 }
+		}],
+		'vue/singleline-html-element-content-newline': 'off'
 	}
 }

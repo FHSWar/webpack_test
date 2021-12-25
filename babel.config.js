@@ -7,13 +7,6 @@ module.exports = {
 				useBuiltIns: 'usage', // 按需引入 polyfill
 				corejs: 3 // 帮助开发者模拟一个包含众多新特性的运行环境
 			}
-		],
-		[
-			'@babel/preset-typescript', // 引用Typescript插件
-			{
-				allExtensions: true, // 支持所有文件扩展名，使 vue 被 babel 编译
-				isTSX: true // 支持 tsx
-			}
 		]
 	],
 	'plugins': [
