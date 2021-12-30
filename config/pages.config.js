@@ -38,12 +38,13 @@ pagesArr.map(page => {
 
 	if (fs.existsSync(pageTemplate)) {
 		const htmlPlugin = new HTMLWebpackPlugin({
+			favicon: './src/public/icons/favicon.ico',
 			filename: `${page}.html`,
 			template: pageTemplate,
 			chunks: [page]
 		})
 		HTMLPlugins.push(htmlPlugin)
-		Entries[page] = ['/Users/fhs_war/Documents/myGithub/webpack_test/node_modules/web-vitals/dist/polyfill', pageEntry]
+		Entries[page] = [path.resolve(__dirname, '/node_modules/web-vitals/dist/polyfill'), pageEntry]
 	} else {
 		console.log(`${pageTemplate} 目录下没有 index.html`)
 	}
