@@ -52,6 +52,7 @@ specifiers:
   vue-loader: 17.0.0
   vue-router: ^4.0.12
   vuex: ^4.0.2
+  web-vitals: ^2.1.2
   webpack: ^5.65.0
   webpack-bundle-analyzer: ^4.5.0
   webpack-cli: ^4.9.1
@@ -63,6 +64,7 @@ dependencies:
   vue: 3.2.26
   vue-router: 4.0.12_vue@3.2.26
   vuex: 4.0.2_vue@3.2.26
+  web-vitals: 2.1.2
 
 devDependencies:
   '@babel/core': 7.16.5
@@ -7777,6 +7779,10 @@ packages:
     dependencies:
       minimalistic-assert: 1.0.1
     dev: true
+
+  /web-vitals/2.1.2:
+    resolution: {integrity: sha1-OmyPrr+Ql6bM0X9fRclIXY1i2rE=, tarball: web-vitals/download/web-vitals-2.1.2.tgz}
+    dev: false
 
   /webpack-bundle-analyzer/4.5.0:
     resolution: {integrity: sha1-Gw7qKUfnNSh1Sm+a8+kbK24PedU=, tarball: webpack-bundle-analyzer/download/webpack-bundle-analyzer-4.5.0.tgz}

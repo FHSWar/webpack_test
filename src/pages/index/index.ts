@@ -1,4 +1,5 @@
 import '@styles/tailwind.css'
+import '@utils/reportWebVitals'
 import App from './App.vue'
 import { createApp } from 'vue'
 import router from './router'

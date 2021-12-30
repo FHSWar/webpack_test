@@ -27,8 +27,6 @@ switch (true) {
 	case isProd:
 		pagesArr.push(...productionProjects)
 		break
-	default:
-		console.log('错误的环境设置!')
 }
 pagesArr.length ? null : pagesArr.push(...fs.readdirSync(dest))
 
@@ -44,12 +42,10 @@ pagesArr.map(page => {
 			template: pageTemplate,
 			chunks: [page]
 		})
-
 		HTMLPlugins.push(htmlPlugin)
-		Entries[page] = [pageEntry]
+		Entries[page] = ['/Users/fhs_war/Documents/myGithub/webpack_test/node_modules/web-vitals/dist/polyfill', pageEntry]
 	} else {
 		console.log(`${pageTemplate} 目录下没有 index.html`)
 	}
 })
-
 module.exports = [HTMLPlugins, Entries]

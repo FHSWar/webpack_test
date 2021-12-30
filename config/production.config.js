@@ -19,7 +19,6 @@ const plugins = [
                 .map(abs => `${process.cwd()}/${sourcePath}`.includes(abs))
                 .filter(flag => flag === true)[0]
             if (noMinify) {
-                console.log('filename', sourcePath)
                 return false
             }else{
                 return true

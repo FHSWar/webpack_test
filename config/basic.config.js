@@ -14,7 +14,6 @@ function dataUrlConditionHandler(source, { filename }) {
 		return resolve(__dirname, `../src/pages/${project}`)
 	}).map(abs => filename.includes(abs)).filter(flag => flag === true)[0]
 	if (!noInline && source.length < 4 * 1024) {
-		console.log('filename', filename)
 		return true
 	}
 }
