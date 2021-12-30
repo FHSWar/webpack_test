@@ -12,7 +12,16 @@
         "lib": [
             "esnext",
             "dom"
-        ]
+        ],
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["src/*"],
+            "@fonts/*": ["src/public/fonts/*"],
+            "@icons/*": ["src/public/icons/*"],
+            "@images/*": ["src/public/images/*"],
+            "@styles/*": ["src/ublic/styles/*"],
+            "@utils/*": ["src/public/utils/*"]
+        }
     },
     "include": [
         "src/**/*.ts",
