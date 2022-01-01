@@ -18,16 +18,17 @@ function dataUrlConditionHandler(source, { filename }) {
 	}
 }
 
+const cache = {
+	type: 'filesystem',
+	allowCollectingMemory: true,
+}
 const entry = Entries
 const output = {
 	filename: '[name]/index[contenthash].js',
 	assetModuleFilename: 'assets/[contenthash][ext]',
 	clean: true
 }
-const cache = {
-	type: 'filesystem',
-	allowCollectingMemory: true,
-}
+
 const _module = {
 	rules: [
 		{

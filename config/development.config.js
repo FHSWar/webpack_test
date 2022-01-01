@@ -1,5 +1,5 @@
 const { loopWhile } = require('deasync')
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin')
 const { networkInterfaces } = require('os')
 const { getPort } = require('portfinder')
 const IP = networkInterfaces()['en0'][1]['address']

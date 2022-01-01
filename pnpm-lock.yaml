@@ -7,6 +7,7 @@ specifiers:
   '@babel/preset-typescript': ^7.16.5
   '@babel/runtime': ^7.16.5
   '@babel/runtime-corejs3': ^7.16.5
+  '@soda/friendly-errors-webpack-plugin': ^1.8.1
   '@typescript-eslint/eslint-plugin': ^5.7.0
   '@typescript-eslint/parser': ^5.7.0
   '@vue/babel-plugin-jsx': ^1.1.1
@@ -27,7 +28,6 @@ specifiers:
   eslint-plugin-vue: ^8.2.0
   eslint-webpack-plugin: ^3.1.1
   fork-ts-checker-webpack-plugin: ^6.5.0
-  friendly-errors-webpack-plugin: ^1.7.0
   html-webpack-plugin: ^5.5.0
   husky: ^7.0.4
   image-minimizer-webpack-plugin: ^2.2.0
@@ -73,6 +73,7 @@ devDependencies:
   '@babel/preset-typescript': 7.16.5_@babel+core@7.16.5
   '@babel/runtime': 7.16.5
   '@babel/runtime-corejs3': 7.16.5
+  '@soda/friendly-errors-webpack-plugin': 1.8.1_webpack@5.65.0
   '@typescript-eslint/eslint-plugin': 5.7.0_a6f6159640504abdd3de077f8bcadb33
   '@typescript-eslint/parser': 5.7.0_eslint@8.5.0+typescript@4.5.4
   '@vue/babel-plugin-jsx': 1.1.1_@babel+core@7.16.5
@@ -91,7 +92,6 @@ devDependencies:
   eslint-plugin-vue: 8.2.0_eslint@8.5.0
   eslint-webpack-plugin: 3.1.1_eslint@8.5.0+webpack@5.65.0
   fork-ts-checker-webpack-plugin: 6.5.0_caa494e48503ba644b20e05ec3f6797d
-  friendly-errors-webpack-plugin: 1.7.0_webpack@5.65.0
   html-webpack-plugin: 5.5.0_webpack@5.65.0
   husky: 7.0.4
   image-minimizer-webpack-plugin: 2.2.0_webpack@5.65.0
@@ -1388,6 +1388,19 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /@soda/friendly-errors-webpack-plugin/1.8.1_webpack@5.65.0:
+    resolution: {integrity: sha512-h2ooWqP8XuFqTXT+NyAFbrArzfQA7R6HTezADrvD9Re8fxMLTPPniLdqVTdDaO0eIoLaAwKT+d6w+5GeTk7Vbg==, tarball: '@soda/friendly-errors-webpack-plugin/download/@soda/friendly-errors-webpack-plugin-1.8.1.tgz'}
+    engines: {node: '>=8.0.0'}
+    peerDependencies:
+      webpack: ^4.0.0 || ^5.0.0
+    dependencies:
+      chalk: 3.0.0
+      error-stack-parser: 2.0.6
+      string-width: 4.2.3
+      strip-ansi: 6.0.1
+      webpack: 5.65.0_webpack-cli@4.9.1
+    dev: true
+
   /@trysound/sax/0.2.0:
     resolution: {integrity: sha1-zMqrdYr1Z2Hre/N69vA/Mm3XmK0=, tarball: '@trysound/sax/download/@trysound/sax-0.2.0.tgz'}
     engines: {node: '>=10.13.0'}
@@ -1916,7 +1929,7 @@ packages:
     dev: true
 
   /ajv/6.12.6:
-    resolution: {integrity: sha1-uvWmLoArB9l3A0WG+MO69a3ybfQ=, tarball: ajv/download/ajv-6.12.6.tgz}
+    resolution: {integrity: sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==, tarball: ajv/download/ajv-6.12.6.tgz}
     dependencies:
       fast-deep-equal: 3.1.3
       fast-json-stable-stringify: 2.1.0
@@ -1958,11 +1971,6 @@ packages:
   /ansi-regex/2.1.1:
     resolution: {integrity: sha1-w7M6te42DYbg5ijwRorn7yfWVN8=, tarball: ansi-regex/download/ansi-regex-2.1.1.tgz}
     engines: {node: '>=0.10.0'}
-    dev: true
-
-  /ansi-regex/3.0.0:
-    resolution: {integrity: sha1-7QMXwyIGT3lGbAKWa922Bas32Zg=, tarball: ansi-regex/download/ansi-regex-3.0.0.tgz}
-    engines: {node: '>=4'}
     dev: true
 
   /ansi-regex/5.0.1:
@@ -2439,6 +2447,14 @@ packages:
       ansi-styles: 3.2.1
       escape-string-regexp: 1.0.5
       supports-color: 5.5.0
+    dev: true
+
+  /chalk/3.0.0:
+    resolution: {integrity: sha1-P3PCv1JlkfV0zEksUeJFY0n4ROQ=, tarball: chalk/download/chalk-3.0.0.tgz}
+    engines: {node: '>=8'}
+    dependencies:
+      ansi-styles: 4.3.0
+      supports-color: 7.2.0
     dev: true
 
   /chalk/4.1.2:
@@ -3879,17 +3895,6 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
-  /friendly-errors-webpack-plugin/1.7.0_webpack@5.65.0:
-    resolution: {integrity: sha1-78hsu4FiJFZYYaG+ep2E0Kr+oTY=, tarball: friendly-errors-webpack-plugin/download/friendly-errors-webpack-plugin-1.7.0.tgz}
-    peerDependencies:
-      webpack: ^2.0.0 || ^3.0.0 || ^4.0.0
-    dependencies:
-      chalk: 1.1.3
-      error-stack-parser: 2.0.6
-      string-width: 2.1.1
-      webpack: 5.65.0_webpack-cli@4.9.1
-    dev: true
-
   /from2/2.3.0:
     resolution: {integrity: sha1-i/tVAr3kpNNs/e6gB/zKIdfjgq8=, tarball: from2/download/from2-2.3.0.tgz}
     dependencies:
@@ -4587,11 +4592,6 @@ packages:
   /is-finite/1.1.0:
     resolution: {integrity: sha1-kEE1x3+0LAZB1qobzbxNqo2ggvM=, tarball: is-finite/download/is-finite-1.1.0.tgz}
     engines: {node: '>=0.10.0'}
-    dev: true
-
-  /is-fullwidth-code-point/2.0.0:
-    resolution: {integrity: sha1-o7MKXE8ZkYMWeqq5O+764937ZU8=, tarball: is-fullwidth-code-point/download/is-fullwidth-code-point-2.0.0.tgz}
-    engines: {node: '>=4'}
     dev: true
 
   /is-fullwidth-code-point/3.0.0:
@@ -7130,14 +7130,6 @@ packages:
     engines: {node: '>=0.6.19'}
     dev: true
 
-  /string-width/2.1.1:
-    resolution: {integrity: sha1-q5Pyeo3BPSjKyBXEYhQ6bZASrp4=, tarball: string-width/download/string-width-2.1.1.tgz}
-    engines: {node: '>=4'}
-    dependencies:
-      is-fullwidth-code-point: 2.0.0
-      strip-ansi: 4.0.0
-    dev: true
-
   /string-width/4.2.3:
     resolution: {integrity: sha1-JpxxF9J7Ba0uU2gwqOyJXvnG0BA=, tarball: string-width/download/string-width-4.2.3.tgz}
     engines: {node: '>=8'}
@@ -7173,13 +7165,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       ansi-regex: 2.1.1
-    dev: true
-
-  /strip-ansi/4.0.0:
-    resolution: {integrity: sha1-qEeQIusaw2iocTibY1JixQXuNo8=, tarball: strip-ansi/download/strip-ansi-4.0.0.tgz}
-    engines: {node: '>=4'}
-    dependencies:
-      ansi-regex: 3.0.0
     dev: true
 
   /strip-ansi/6.0.1:
