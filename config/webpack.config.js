@@ -38,6 +38,7 @@ if (isAnls || isProd) {
 // 特定于某一个环境的
 switch (true) {
 	case isAnls:
+		devtool = false
 		plugins.push(...analysisPlugins)
 		break
 	// 开发模式
@@ -45,7 +46,7 @@ switch (true) {
 		mode = DEVELOPMENT
 		stats = 'errors-warnings'
 		// 方便开发定位代码
-		devtool = 'eval'
+		devtool = 'eval-cheap-source-map'
 		// contenthash 导致抽取 css 会使 HMR 失效，不抽取热加载还快一点
 		_module['rules'][3]['use'].unshift('style-loader')
 		// 不需要优化，不开可以缩短启动和热更新时间
