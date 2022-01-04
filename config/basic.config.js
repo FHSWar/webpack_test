@@ -18,10 +18,6 @@ function dataUrlConditionHandler(source, { filename }) {
 	}
 }
 
-const cache = {
-	type: 'filesystem',
-	allowCollectingMemory: true,
-}
 const entry = Entries
 const output = {
 	filename: '[name]/index[contenthash].js',
@@ -121,7 +117,6 @@ const _resolve = {
 module.exports = {
 	entry,
 	output,
-	cache,
 	_resolve,
 	_module,
 	plugins

@@ -21,11 +21,12 @@ const getUsablePort = (customPort) => {
 let port = 9000, done = false
 getUsablePort(port)
 
+const cache = false
 const devServer = {
     port,
     static: './dist'
 }
-
+const optimization = false
 const plugins = [
     new FriendlyErrorsWebpackPlugin({
         compilationSuccessInfo: {
@@ -39,6 +40,8 @@ const plugins = [
 
 
 module.exports = {
+    devCache: cache,
+    devOpt: optimization,
     devServer,
     plugins
 }

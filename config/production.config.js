@@ -3,6 +3,10 @@ const { noMinifyProjects } = require('../customize.config')
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin')
 const { resolve } = require('path')
 
+const cache = {
+	type: 'filesystem',
+	allowCollectingMemory: true,
+}
 const optimization = {
     splitChunks: {
         chunks: 'all'
@@ -35,6 +39,7 @@ const plugins = [
 ]
 
 module.exports = {
-    optimization,
+    prodCache: cache,
+    prodOpt: optimization,
     plugins
 }
