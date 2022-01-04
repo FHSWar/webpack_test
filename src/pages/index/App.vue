@@ -25,8 +25,8 @@ year.value = 2021
       <img :src="require('@images/png.png')" width="300" alt="png" />
     </div>
     <tsxTest />
-    <router-link to="/">Home</router-link>|
-    <router-link to="/about">About</router-link>
+    <router-link to="/" class="text-red-500 text-lg">Home</router-link>|
+    <router-link to="/ajvTest" class="text-green-900 text-lg">ajvTest</router-link>|
     <router-view />
   </div>
 </template>
