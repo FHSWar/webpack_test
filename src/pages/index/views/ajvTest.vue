@@ -1,7 +1,7 @@
 <template>
 	<div class="about">
 		<h1>This is an ajvTest page</h1>
-		<span>应该没问题的。</span>
+		<span>应该没问题的</span>
 	</div>
 </template>
 

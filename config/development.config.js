@@ -21,7 +21,10 @@ const getUsablePort = (customPort) => {
 let port = 9000, done = false
 getUsablePort(port)
 
-const cache = false
+const cache = {
+	type: 'filesystem',
+	allowCollectingMemory: true,
+}
 const devServer = {
     port,
     static: './dist'
