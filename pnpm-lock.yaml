@@ -8,6 +8,7 @@ specifiers:
   '@babel/runtime': ^7.16.5
   '@babel/runtime-corejs3': ^7.16.5
   '@soda/friendly-errors-webpack-plugin': ^1.8.1
+  '@types/ajv': ^1.0.0
   '@typescript-eslint/eslint-plugin': ^5.7.0
   '@typescript-eslint/parser': ^5.7.0
   '@vue/babel-plugin-jsx': ^1.1.1
@@ -60,6 +61,7 @@ specifiers:
   webpack-dev-server: ^4.6.0
 
 dependencies:
+  '@types/ajv': 1.0.0
   ajv: 8.8.2
   axios: 0.24.0
   dayjs: 1.10.7
@@ -1407,6 +1409,13 @@ packages:
     resolution: {integrity: sha1-zMqrdYr1Z2Hre/N69vA/Mm3XmK0=, tarball: '@trysound/sax/download/@trysound/sax-0.2.0.tgz'}
     engines: {node: '>=10.13.0'}
     dev: true
+
+  /@types/ajv/1.0.0:
+    resolution: {integrity: sha1-T7JEB0Ly9sMOf7B5e4OfxvaWaCo=, tarball: '@types/ajv/download/@types/ajv-1.0.0.tgz'}
+    deprecated: This is a stub types definition for ajv (https://github.com/epoberezkin/ajv). ajv provides its own type definitions, so you don't need @types/ajv installed!
+    dependencies:
+      ajv: 8.8.2
+    dev: false
 
   /@types/eslint-scope/3.7.2:
     resolution: {integrity: sha512-TzgYCWoPiTeRg6RQYgtuW7iODtVoKu3RVL72k3WohqhjfaOLK5Mg2T4Tg1o2bSfu0vPkoI48wdQFv5b/Xe04wQ==, tarball: '@types/eslint-scope/download/@types/eslint-scope-3.7.2.tgz'}

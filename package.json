@@ -17,6 +17,7 @@
     "not dead"
   ],
   "dependencies": {
+    "@types/ajv": "^1.0.0",
     "ajv": "^8.8.2",
     "axios": "^0.24.0",
     "dayjs": "^1.10.7",
