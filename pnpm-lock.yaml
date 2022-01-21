@@ -8,7 +8,6 @@ specifiers:
   '@babel/runtime': ^7.16.5
   '@babel/runtime-corejs3': ^7.16.5
   '@soda/friendly-errors-webpack-plugin': ^1.8.1
-  '@types/ajv': ^1.0.0
   '@typescript-eslint/eslint-plugin': ^5.7.0
   '@typescript-eslint/parser': ^5.7.0
   '@vue/babel-plugin-jsx': ^1.1.1
@@ -48,7 +47,7 @@ specifiers:
   sass-loader: ^12.4.0
   style-loader: ^3.3.1
   svgo-loader: ^3.0.0
-  tailwindcss: ^3.0.7
+  tailwindcss: ^3.0.15
   typescript: ^4.5.4
   vue: ^3.2.26
   vue-loader: 17.0.0
@@ -61,7 +60,6 @@ specifiers:
   webpack-dev-server: ^4.6.0
 
 dependencies:
-  '@types/ajv': 1.0.0
   ajv: 8.8.2
   axios: 0.24.0
   dayjs: 1.10.7
@@ -114,7 +112,7 @@ devDependencies:
   sass-loader: 12.4.0_sass@1.45.0+webpack@5.65.0
   style-loader: 3.3.1_webpack@5.65.0
   svgo-loader: 3.0.0
-  tailwindcss: 3.0.7_16a290f6d0e3717bf6d2667234aebd30
+  tailwindcss: 3.0.15_16a290f6d0e3717bf6d2667234aebd30
   typescript: 4.5.4
   vue-loader: 17.0.0_webpack@5.65.0
   webpack: 5.65.0_webpack-cli@4.9.1
@@ -237,7 +235,7 @@ packages:
       '@babel/traverse': 7.16.5
       debug: 4.3.3
       lodash.debounce: 4.0.8
-      resolve: 1.20.0
+      resolve: 1.21.0
       semver: 6.3.0
     transitivePeerDependencies:
       - supports-color
@@ -1410,13 +1408,6 @@ packages:
     engines: {node: '>=10.13.0'}
     dev: true
 
-  /@types/ajv/1.0.0:
-    resolution: {integrity: sha1-T7JEB0Ly9sMOf7B5e4OfxvaWaCo=, tarball: '@types/ajv/download/@types/ajv-1.0.0.tgz'}
-    deprecated: This is a stub types definition for ajv (https://github.com/epoberezkin/ajv). ajv provides its own type definitions, so you don't need @types/ajv installed!
-    dependencies:
-      ajv: 8.8.2
-    dev: false
-
   /@types/eslint-scope/3.7.2:
     resolution: {integrity: sha512-TzgYCWoPiTeRg6RQYgtuW7iODtVoKu3RVL72k3WohqhjfaOLK5Mg2T4Tg1o2bSfu0vPkoI48wdQFv5b/Xe04wQ==, tarball: '@types/eslint-scope/download/@types/eslint-scope-3.7.2.tgz'}
     dependencies:
@@ -1894,7 +1885,7 @@ packages:
     dev: true
 
   /acorn/7.4.1:
-    resolution: {integrity: sha1-/q7SVZc9LndVW4PbwIhRpsY1IPo=, tarball: acorn/download/acorn-7.4.1.tgz?cache=0&sync_timestamp=1637225784941&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Facorn%2Fdownload%2Facorn-7.4.1.tgz}
+    resolution: {integrity: sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==, tarball: acorn/download/acorn-7.4.1.tgz}
     engines: {node: '>=0.4.0'}
     hasBin: true
     dev: true
@@ -1994,12 +1985,12 @@ packages:
     dev: true
 
   /ansi-styles/2.2.1:
-    resolution: {integrity: sha1-tDLdM1i2NM914eRmQ2gkBTPB3b4=, tarball: ansi-styles/download/ansi-styles-2.2.1.tgz}
+    resolution: {integrity: sha512-kmCevFghRiWM7HB5zTPULl4r9bVFSWjz62MhqizDGUrq2NWuNMQyuv4tHHoKJHs69M/MF64lEcHdYIocrdWQYA==, tarball: ansi-styles/download/ansi-styles-2.2.1.tgz}
     engines: {node: '>=0.10.0'}
     dev: true
 
   /ansi-styles/3.2.1:
-    resolution: {integrity: sha1-QfuyAkPlCxK+DwS43tvwdSDOhB0=, tarball: ansi-styles/download/ansi-styles-3.2.1.tgz}
+    resolution: {integrity: sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==, tarball: ansi-styles/download/ansi-styles-3.2.1.tgz}
     engines: {node: '>=4'}
     dependencies:
       color-convert: 1.9.3
@@ -2037,7 +2028,7 @@ packages:
     dev: true
 
   /arg/5.0.1:
-    resolution: {integrity: sha1-6wyaj3d4bK0q+P8rhiiZhC17ats=, tarball: arg/download/arg-5.0.1.tgz}
+    resolution: {integrity: sha512-e0hDa9H2Z9AwFkk2qDlwhoMYE4eToKarchkQHovNdLTCYMHZHeRjI71crOh+dio4K6u1IcwubQqo79Ga4CyAQA==, tarball: arg/download/arg-5.0.1.tgz}
     dev: true
 
   /argparse/2.0.1:
@@ -2476,7 +2467,7 @@ packages:
     dev: true
 
   /chokidar/3.5.2:
-    resolution: {integrity: sha1-26OXb8rbAW9m/TZQIdkWANAcHnU=, tarball: chokidar/download/chokidar-3.5.2.tgz}
+    resolution: {integrity: sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==, tarball: chokidar/download/chokidar-3.5.2.tgz}
     engines: {node: '>= 8.10.0'}
     dependencies:
       anymatch: 3.1.2
@@ -5266,7 +5257,7 @@ packages:
     resolution: {integrity: sha1-5m2xg4sgDB38IzIl0SyzZSDiNKg=, tarball: normalize-package-data/download/normalize-package-data-2.5.0.tgz}
     dependencies:
       hosted-git-info: 2.8.9
-      resolve: 1.20.0
+      resolve: 1.21.0
       semver: 5.7.1
       validate-npm-package-license: 3.0.4
     dev: true
@@ -5560,14 +5551,14 @@ packages:
     dev: true
 
   /parse-json/2.2.0:
-    resolution: {integrity: sha1-9ID0BDTvgHQfhGkJn43qGPVaTck=, tarball: parse-json/download/parse-json-2.2.0.tgz?cache=0&sync_timestamp=1637476739355&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fparse-json%2Fdownload%2Fparse-json-2.2.0.tgz}
+    resolution: {integrity: sha1-9ID0BDTvgHQfhGkJn43qGPVaTck=, tarball: parse-json/download/parse-json-2.2.0.tgz}
     engines: {node: '>=0.10.0'}
     dependencies:
       error-ex: 1.3.2
     dev: true
 
   /parse-json/5.2.0:
-    resolution: {integrity: sha1-x2/Gbe5UIxyWKyK8yKcs8vmXU80=, tarball: parse-json/download/parse-json-5.2.0.tgz?cache=0&sync_timestamp=1637476739355&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fparse-json%2Fdownload%2Fparse-json-5.2.0.tgz}
+    resolution: {integrity: sha1-x2/Gbe5UIxyWKyK8yKcs8vmXU80=, tarball: parse-json/download/parse-json-5.2.0.tgz}
     engines: {node: '>=8'}
     dependencies:
       '@babel/code-frame': 7.16.0
@@ -5720,7 +5711,7 @@ packages:
       postcss: ^8.2.2
     dependencies:
       postcss: 8.4.5
-      postcss-selector-parser: 6.0.7
+      postcss-selector-parser: 6.0.8
       postcss-value-parser: 4.2.0
     dev: true
 
@@ -5913,9 +5904,11 @@ packages:
       postcss: 7.0.39
     dev: true
 
-  /postcss-js/3.0.3:
-    resolution: {integrity: sha1-LwvTcKLoWZ1FQ59pcEA7WHOr2jM=, tarball: postcss-js/download/postcss-js-3.0.3.tgz}
-    engines: {node: '>=10.0'}
+  /postcss-js/4.0.0_postcss@8.4.5:
+    resolution: {integrity: sha512-77QESFBwgX4irogGVPgQ5s07vLvFqWr228qZY+w6lW599cRlK/HmnlivnnVUxkjHnCu4J16PDMHcH+e+2HbvTQ==, tarball: postcss-js/download/postcss-js-4.0.0.tgz}
+    engines: {node: ^12 || ^14 || >= 16}
+    peerDependencies:
+      postcss: ^8.3.3
     dependencies:
       camelcase-css: 2.0.1
       postcss: 8.4.5
@@ -5993,7 +5986,7 @@ packages:
       caniuse-api: 3.0.0
       cssnano-utils: 2.0.1_postcss@8.4.5
       postcss: 8.4.5
-      postcss-selector-parser: 6.0.7
+      postcss-selector-parser: 6.0.8
     dev: true
 
   /postcss-minify-font-values/5.0.1_postcss@8.4.5:
@@ -6039,7 +6032,7 @@ packages:
     dependencies:
       alphanum-sort: 1.0.2
       postcss: 8.4.5
-      postcss-selector-parser: 6.0.7
+      postcss-selector-parser: 6.0.8
     dev: true
 
   /postcss-modules-extract-imports/3.0.0_postcss@8.4.5:
@@ -6090,7 +6083,7 @@ packages:
       postcss: ^8.2.14
     dependencies:
       postcss: 8.4.5
-      postcss-selector-parser: 6.0.7
+      postcss-selector-parser: 6.0.8
     dev: true
 
   /postcss-nesting/7.0.1:
@@ -6336,6 +6329,14 @@ packages:
       util-deprecate: 1.0.2
     dev: true
 
+  /postcss-selector-parser/6.0.8:
+    resolution: {integrity: sha512-D5PG53d209Z1Uhcc0qAZ5U3t5HagH3cxu+WLZ22jt3gLUpXM4eXXfiO14jiDWST3NNooX/E8wISfOhZ9eIjGTQ==, tarball: postcss-selector-parser/download/postcss-selector-parser-6.0.8.tgz}
+    engines: {node: '>=4'}
+    dependencies:
+      cssesc: 3.0.0
+      util-deprecate: 1.0.2
+    dev: true
+
   /postcss-svgo/5.0.3_postcss@8.4.5:
     resolution: {integrity: sha1-2UUYV1bl36rgf57bDTyuf/efmzA=, tarball: postcss-svgo/download/postcss-svgo-5.0.3.tgz}
     engines: {node: ^10 || ^12 || >=14.0}
@@ -6355,7 +6356,7 @@ packages:
     dependencies:
       alphanum-sort: 1.0.2
       postcss: 8.4.5
-      postcss-selector-parser: 6.0.7
+      postcss-selector-parser: 6.0.8
     dev: true
 
   /postcss-value-parser/4.2.0:
@@ -6673,6 +6674,15 @@ packages:
     dependencies:
       is-core-module: 2.8.0
       path-parse: 1.0.7
+    dev: true
+
+  /resolve/1.21.0:
+    resolution: {integrity: sha512-3wCbTpk5WJlyE4mSOtDLhqQmGFi0/TD9VPwmiolnk8U0wRgMEktqCXd3vy5buTO3tljvalNvKrjHEfrd2WpEKA==, tarball: resolve/download/resolve-1.21.0.tgz}
+    hasBin: true
+    dependencies:
+      is-core-module: 2.8.0
+      path-parse: 1.0.7
+      supports-preserve-symlinks-flag: 1.0.0
     dev: true
 
   /responselike/1.0.2:
@@ -7247,7 +7257,7 @@ packages:
     dependencies:
       browserslist: 4.19.1
       postcss: 8.4.5
-      postcss-selector-parser: 6.0.7
+      postcss-selector-parser: 6.0.8
     dev: true
 
   /supports-color/2.0.0:
@@ -7281,6 +7291,11 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
+  /supports-preserve-symlinks-flag/1.0.0:
+    resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==, tarball: supports-preserve-symlinks-flag/download/supports-preserve-symlinks-flag-1.0.0.tgz}
+    engines: {node: '>= 0.4'}
+    dev: true
+
   /svg-tags/1.0.0:
     resolution: {integrity: sha1-WPcc7jvVGbWdSyqEO2x95krAR2Q=, tarball: svg-tags/download/svg-tags-1.0.0.tgz}
     dev: true
@@ -7306,8 +7321,8 @@ packages:
       stable: 0.1.8
     dev: true
 
-  /tailwindcss/3.0.7_16a290f6d0e3717bf6d2667234aebd30:
-    resolution: {integrity: sha512-rZdKNHtC64jcQncLoWOuCzj4lQDTAgLtgK3WmQS88tTdpHh9OwLqULTQxI3tw9AMJsqSpCKlmcjW/8CSnni6zQ==, tarball: tailwindcss/download/tailwindcss-3.0.7.tgz}
+  /tailwindcss/3.0.15_16a290f6d0e3717bf6d2667234aebd30:
+    resolution: {integrity: sha512-bT2iy7FtjwgsXik4ZoJnHXR+SRCiGR1W95fVqpLZebr64m4ahwUwRbIAc5w5+2fzr1YF4Ct2eI7dojMRRl8sVQ==, tarball: tailwindcss/download/tailwindcss-3.0.15.tgz}
     engines: {node: '>=12.13.0'}
     hasBin: true
     peerDependencies:
@@ -7329,14 +7344,13 @@ packages:
       normalize-path: 3.0.0
       object-hash: 2.2.0
       postcss: 8.4.5
-      postcss-js: 3.0.3
+      postcss-js: 4.0.0_postcss@8.4.5
       postcss-load-config: 3.1.0
       postcss-nested: 5.0.6_postcss@8.4.5
-      postcss-selector-parser: 6.0.7
+      postcss-selector-parser: 6.0.8
       postcss-value-parser: 4.2.0
       quick-lru: 5.1.1
-      resolve: 1.20.0
-      tmp: 0.2.1
+      resolve: 1.21.0
     transitivePeerDependencies:
       - ts-node
     dev: true
@@ -7463,13 +7477,6 @@ packages:
 
   /timsort/0.3.0:
     resolution: {integrity: sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=, tarball: timsort/download/timsort-0.3.0.tgz}
-    dev: true
-
-  /tmp/0.2.1:
-    resolution: {integrity: sha1-hFf8MDfc9HGcJRNnoa9lAO4czxQ=, tarball: tmp/download/tmp-0.2.1.tgz}
-    engines: {node: '>=8.17.0'}
-    dependencies:
-      rimraf: 3.0.2
     dev: true
 
   /to-buffer/1.1.1:

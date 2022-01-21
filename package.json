@@ -17,7 +17,6 @@
     "not dead"
   ],
   "dependencies": {
-    "@types/ajv": "^1.0.0",
     "ajv": "^8.8.2",
     "axios": "^0.24.0",
     "dayjs": "^1.10.7",
@@ -70,7 +69,7 @@
     "sass-loader": "^12.4.0",
     "style-loader": "^3.3.1",
     "svgo-loader": "^3.0.0",
-    "tailwindcss": "^3.0.7",
+    "tailwindcss": "^3.0.15",
     "typescript": "^4.5.4",
     "vue-loader": "17.0.0",
     "webpack": "^5.65.0",
